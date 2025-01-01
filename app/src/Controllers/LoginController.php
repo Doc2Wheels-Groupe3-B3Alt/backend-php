@@ -17,8 +17,7 @@ class LoginController extends AbstractController
     {
 
         $dsn = new Dsn();
-        $db = new \PDO("mysql:host={$dsn->getHost()};port={$dsn->getPort()}", $dsn->getUser(), $dsn->getPassword());
-        $result = "";
+        $db = new \PDO("mysql:host={$dsn->getHost()};dbname={$dsn->getDbName()};port={$dsn->getPort()}", $dsn->getUser(), $dsn->getPassword());
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $username = $_POST['username'];
             $password = $_POST['password'];
@@ -30,15 +29,16 @@ class LoginController extends AbstractController
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
             if ($user && password_verify($password, $user['password'])) {
-                $result = "Connexion réussie !";
-                return $result;
+                echo("Connexion réussie !");
             } else {
-                $result = "Nom d'utilisateur ou mot de passe incorrect.";
-                return $result;
+                echo("Nom d'utilisateur ou mot de passe incorrect.");
             }
         }
 
+        ob_start();
+        include __DIR__ . '/../Views/login.php';
+        $content = ob_get_clean();
 
-        return new Response($result);
+        return new Response($content, 200);
     }
 }

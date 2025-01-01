@@ -1,3 +1,61 @@
+# INITIALISATION DOCK 2 WHEELS
+
+## Etape 1: Création du container front-end et base de donnée
+
+```bash
+docker compose up -d --build
+```
+
+## Etape 2: Lancement du container bdd dans le terminal
+```bash
+docker exec -it projetPEC-db bash
+```
+
+## Etape 3: Utiliser mysql avec le terminal 
+
+**Si le container existe mais n'est pas lancé:**
+
+```bash
+docker start projetPEC-db
+````
+
+**Ensuite, se connecter à mysql:**
+
+```bash
+docker exec -it projetPEC-db mysql -u root -p
+Enter password: password
+````
+**Afficher les bases de données:**
+
+```bash
+SHOW DATABES;
+````
+**Se connecter à la base de donnée "db":**
+
+```bash
+USE db;
+````
+
+**Pour quitter mysql:**
+
+```bash
+exit
+````
+
+## Etape 4: Accéder à la partie front-end
+**Si le container n'est pas lancé:**
+```bash
+docker start projetPEC
+````
+
+**URL: http://127.0.0.1:8081/[login ou register]**
+
+#
+
+<span style="color:red">EN DESSOUS, READ ME DU PROJET PHP</span>
+
+#
+
 # PHP Framework
 
 ## Table of content

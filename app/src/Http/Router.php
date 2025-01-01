@@ -18,9 +18,9 @@ class Router
                 continue;
             }
 
-            if (self::checkHeaders($request, $route) === false) {
-                continue;
-            }
+            // if (self::checkHeaders($request, $route) === false) {
+            //     continue;
+            // }
 
             $controller = self::getController($route);
             return $controller->process($request);
@@ -31,19 +31,19 @@ class Router
     }
 
     // Ajout de la fonction checkHeaders pour vérifier le format
-    public static function checkHeaders(Request $request, object $route): bool
-    {
-        $headers = $request->getHeaders();
+    // public static function checkHeaders(Request $request, object $route): bool
+    // {
+    //     $headers = $request->getHeaders();
 
-        // Vérifie le Content-Type pour les méthodes POST et PATCH
-        if (in_array($request->getMethod(), ['POST', 'PATCH'])) {
-            if (!isset($headers['Content-Type']) || $headers['Content-Type'] !== 'application/json') {
-                return new Response(json_encode(['error' => 'Unsupported Media Type']), http_response_code(415), ['Content-Type' => 'application/json']);
-            }
-        }
+    //     // Vérifie le Content-Type pour les méthodes POST et PATCH
+    //     if (in_array($request->getMethod(), ['POST', 'PATCH'])) {
+    //         if (!isset($headers['Content-Type']) || $headers['Content-Type'] !== 'application/json') {
+    //             return new Response(json_encode(['error' => 'Unsupported Media Type']), http_response_code(415), ['Content-Type' => 'application/json']);
+    //         }
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 
     private static function getConfig(): array
     {

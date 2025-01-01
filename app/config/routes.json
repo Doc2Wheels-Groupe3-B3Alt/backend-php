@@ -33,5 +33,10 @@
     "path": "/login",
     "methods": ["GET", "POST"],
     "controller": "LoginController"
+  },
+  {
+    "path": "/register",
+    "methods": ["GET", "POST"],
+    "controller": "RegisterController"
   }
 ]
