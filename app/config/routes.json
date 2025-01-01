@@ -38,5 +38,10 @@
     "path": "/register",
     "methods": ["GET", "POST"],
     "controller": "RegisterController"
+  },
+  {
+    "path": "/homepage",
+    "methods": ["GET"],
+    "controller": "HomepageController"
   }
 ]

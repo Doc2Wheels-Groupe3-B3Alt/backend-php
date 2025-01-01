@@ -48,7 +48,7 @@ exit
 docker start projetPEC
 ````
 
-**URL: http://127.0.0.1:8081/[login ou register]**
+**URL: http://127.0.0.1:8081/homepage**
 
 #
 
