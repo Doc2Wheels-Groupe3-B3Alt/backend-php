@@ -30,14 +30,9 @@ class RegisterController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $username = RemoveSpecialChar($_POST['username']);
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-            $error = "Cet identifiant est déjà utilisé";
 
             $test = $db->query("SELECT * FROM users WHERE username='$username'");
             $result = $test->rowCount();
-            if ($result > 0) {
-                $error = "Cet identifiant est déjà utilisé";
-            }
-
 
             $stmt = $db->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
             $stmt->bindParam(':username', $username);
@@ -47,16 +42,14 @@ class RegisterController extends AbstractController
             //     echo "Cet identifiant est déjà utilisé";
             // }
 
-            $stmt->execute([
-                'username' => $username,
-                'password' => $password
-            ]);
+            if ($result == 0) {
+                $stmt->execute();
+                $registerMessage = "Inscription réussie";
+            } else {
+                $registerMessage = "Cet identifiant est déjà utilisé";
+            }
         }
 
-        ob_start();
-        include __DIR__ . '/../Views/register.php';
-        $content = ob_get_clean();
-
-        return new Response($content, 200);
+        return new Response('register', 200);
     }
 }

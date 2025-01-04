@@ -13,8 +13,10 @@
             <h1>
                 Création de compte
             </h1>
-            <div id="error">
-                
+            <div id="registerMessage">
+                <?php
+                echo $registerMessage;
+                ?>
             </div>
         </div>
 
@@ -24,7 +26,7 @@
         </div>
         <br>
         <div id="password">
-            Mot de passe : &nbsp; <input type="password" minlength="1" style="width: 30%;" name="password" rows="1">
+            Mot de passe : &nbsp; <input type="password" minlength="8" style="width: 30%;" name="password" rows="1">
         </div>
 
 

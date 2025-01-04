@@ -29,16 +29,12 @@ class LoginController extends AbstractController
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
             if ($user && password_verify($password, $user['password'])) {
-                echo("Connexion réussie !");
+                $message = "Connexion réussie !";
             } else {
-                echo("Nom d'utilisateur ou mot de passe incorrect.");
+                $message = "Identifiant ou mot de passe incorrect";
             }
         }
 
-        ob_start();
-        include __DIR__ . '/../Views/login.php';
-        $content = ob_get_clean();
-
-        return new Response($content, 200);
+        return new Response('login', 200);
     }
 }

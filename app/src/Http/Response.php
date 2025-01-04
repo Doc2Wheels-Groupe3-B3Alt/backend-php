@@ -10,7 +10,11 @@ class Response
 
     public function __construct(string $content = '', int $status = 200, array $headers = [])
     {
-        $this->content = $content;
+        if ($this->viewExists($content)) {
+            $this->content = $this->renderView($content);
+        }else{
+            $this->content = $content;
+        }
         $this->status = $status;
         $this->headers = $headers;
     }
@@ -41,6 +45,32 @@ class Response
     public function getHeaders(): array
     {
         return $this->headers;
+    }
+
+    public function renderView($view)
+    {
+        $layoutContent = $this->layoutContent();
+        $viewContent = $this->renderOnlyView($view);
+        return str_replace('{{content}}', $viewContent, $layoutContent);
+    }
+
+    protected function layoutContent()
+    {
+        ob_start();
+        include __DIR__ . '/../Views/layouts/main.php';
+        return ob_get_clean();
+    }
+
+    protected function renderOnlyView($view)
+    {
+        ob_start();
+        include __DIR__ . "/../Views/$view.php";
+        return ob_get_clean();
+    }
+
+    private function viewExists($view)
+    {
+        return file_exists(__DIR__ . "/../Views/$view.php");
     }
 
     public function setContent(string $content): self

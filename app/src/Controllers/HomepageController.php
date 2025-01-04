@@ -14,10 +14,6 @@ class HomepageController extends AbstractController
 
     private function homepage()
     {
-        ob_start();
-        include __DIR__ . '/../Views/homepage.php';
-        $content = ob_get_clean();
-
-        return new Response($content, 200);
+        return new Response('homepage', 200);
     }
 }
