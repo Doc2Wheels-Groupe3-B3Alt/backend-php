@@ -42,11 +42,12 @@ class RegisterController extends AbstractController
             //     echo "Cet identifiant est déjà utilisé";
             // }
 
+            // Régler erreur "Undefined variable: message"
             if ($result == 0) {
                 $stmt->execute();
-                $registerMessage = "Inscription réussie";
+                $message = "Inscription réussie";
             } else {
-                $registerMessage = "Cet identifiant est déjà utilisé";
+                $message = "Cet identifiant est déjà utilisé";
             }
         }
 

@@ -28,6 +28,7 @@ class LoginController extends AbstractController
 
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
+            // Régler erreur "Undefined variable: message"
             if ($user && password_verify($password, $user['password'])) {
                 $message = "Connexion réussie !";
             } else {
