@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Http\Request;
 use App\Http\Response;
 use App\Database\Dsn;
+use App\Commands\ConnectDatabase;
 
 class RegisterController extends AbstractController
 {
@@ -16,11 +17,7 @@ class RegisterController extends AbstractController
     private function register()
     {
         // error_reporting(0);
-
-        $dsn = new Dsn();
-        // Ajout de "dbname={$dsn->getDbName()};" pour se connecter à la base de données
-        $db = new \PDO("mysql:host={$dsn->getHost()};dbname={$dsn->getDbName()};port={$dsn->getPort()}", $dsn->getUser(), $dsn->getPassword());
-
+        $db = (new ConnectDatabase())->execute();
         function RemoveSpecialChar($str)
         {
             $res = preg_replace('/[0-9\@\.\;\" "]+/', '', $str);
@@ -51,6 +48,6 @@ class RegisterController extends AbstractController
             }
         }
 
-        return new Response('register', 200);
+        return new Response('register', 200, get_defined_vars()); 
     }
 }

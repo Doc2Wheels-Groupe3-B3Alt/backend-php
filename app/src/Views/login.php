@@ -6,9 +6,9 @@
     </div>
     <hr>
     <div id="message">
-        <?php
-        echo $message;
-        ?>
+        <?php if (isset($message) && !empty($message)) {
+            echo $message;
+        } ?>
     </div>
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>

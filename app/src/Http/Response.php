@@ -8,11 +8,11 @@ class Response
     private int $status;
     private array $headers;
 
-    public function __construct(string $content = '', int $status = 200, array $headers = [])
+    public function __construct(string $content = '', int $status = 200, array $params = [], array $headers = [])
     {
         if ($this->viewExists($content)) {
-            $this->content = $this->renderView($content);
-        }else{
+            $this->content = $this->renderView($content, $params);
+        } else {
             $this->content = $content;
         }
         $this->status = $status;
@@ -47,10 +47,10 @@ class Response
         return $this->headers;
     }
 
-    public function renderView($view)
+    public function renderView($view, $params = [])
     {
         $layoutContent = $this->layoutContent();
-        $viewContent = $this->renderOnlyView($view);
+        $viewContent = $this->renderOnlyView($view, $params);
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
@@ -61,8 +61,11 @@ class Response
         return ob_get_clean();
     }
 
-    protected function renderOnlyView($view)
+    protected function renderOnlyView($view, $params)
     {
+        foreach ($params as $key => $value) {
+            $$key = $value;
+        }
         ob_start();
         include __DIR__ . "/../Views/$view.php";
         return ob_get_clean();

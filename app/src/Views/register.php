@@ -3,11 +3,11 @@
         <h1>
             Création de compte
         </h1>
-        <div id="registerMessage">
-            <?php
-            echo $message;
-            ?>
-        </div>
+        <p>
+            <?php if (isset($message) && !empty($message)) {
+                echo $message;
+            } ?>
+        </p>
     </div>
 
     <hr>
