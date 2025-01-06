@@ -1,20 +1,17 @@
-<form action="/login" method="POST">
+<form action="/login" method="POST" class="page-connexion">
     <div id="titre">
         <h1>
             Connexion à votre compte
         </h1>
     </div>
-    <hr>
-    <div id="message">
+    <p class="h-7 <?php echo $messageColor ?>">
         <?php if (isset($message) && !empty($message)) {
             echo $message;
         } ?>
+    </p>
+    <div class="connexion-bloc">
+        <input type="text" class="input" minlength="1" name="username" placeholder="Username or Email" />
+        <input type="password" class="input" placeholder="Password" minlength="8" name="password" />
+        <input type="submit" value="Confirmer" class="button bg-light-grey c-black ml-8 mr-8">
     </div>
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <button type="submit">Login</button>
 </form>

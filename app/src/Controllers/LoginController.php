@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Http\Request;
 use App\Http\Response;
-use App\Database\Dsn;
 use App\Commands\ConnectDatabase;
 
 class LoginController extends AbstractController
@@ -27,11 +26,14 @@ class LoginController extends AbstractController
 
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            // Régler erreur "Undefined variable: message"
-            if ($user && password_verify($password, $user['password'])) {
-                $message = "Connexion réussie !";
+            $email = $db->query("SELECT email FROM users WHERE email='$username'")->fetchColumn();
+
+            if ($email || $user && password_verify($password, $user['password'])) {
+                $message = "Connexion réussie";
+                $messageColor = "c-green";
             } else {
                 $message = "Identifiant ou mot de passe incorrect";
+                $messageColor = "c-red";
             }
         }
 
