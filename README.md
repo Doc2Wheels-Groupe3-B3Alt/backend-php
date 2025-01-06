@@ -13,6 +13,8 @@ docker exec -it projetPEC-db bash
 
 ## Etape 3: Utiliser mysql avec le terminal 
 
+### Fichier init.sql: backend-php/mysql/db
+
 **Si le container existe mais n'est pas lancé:**
 
 ```bash
