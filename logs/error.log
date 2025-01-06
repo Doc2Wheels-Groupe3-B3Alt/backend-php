@@ -125,3 +125,35 @@ AH00558: apache2: Could not reliably determine the server's fully qualified doma
 [Mon Jan 06 00:10:45.043097 2025] [php:error] [pid 23:tid 23] [client 172.25.0.1:58030] script '/var/www/html/index.php' not found or unable to stat, referer: http://localhost:8081/homepage
 [Mon Jan 06 00:10:58.122472 2025] [php:error] [pid 17:tid 17] [client 172.25.0.1:62296] script '/var/www/html/index.php' not found or unable to stat, referer: http://localhost:8081/homepage
 [Mon Jan 06 00:10:59.951855 2025] [php:error] [pid 17:tid 17] [client 172.25.0.1:62296] script '/var/www/html/index.php' not found or unable to stat
+[Mon Jan 06 00:44:20.462618 2025] [core:error] [pid 22:tid 22] [client 172.25.0.1:56424] AH00124: Request exceeded the limit of 10 internal redirects due to probable configuration error. Use 'LimitInternalRecursion' to increase the limit if necessary. Use 'LogLevel debug' to get a backtrace.
+[Mon Jan 06 00:44:43.522765 2025] [core:error] [pid 17:tid 17] [client 172.25.0.1:62726] AH00124: Request exceeded the limit of 10 internal redirects due to probable configuration error. Use 'LimitInternalRecursion' to increase the limit if necessary. Use 'LogLevel debug' to get a backtrace.
+[Mon Jan 06 01:54:50.849894 2025] [core:error] [pid 22:tid 22] [client 172.25.0.1:61212] AH00124: Request exceeded the limit of 10 internal redirects due to probable configuration error. Use 'LimitInternalRecursion' to increase the limit if necessary. Use 'LogLevel debug' to get a backtrace., referer: http://localhost:8081/login
+[Mon Jan 06 01:58:16.521007 2025] [core:error] [pid 21:tid 21] [client 172.25.0.1:63672] AH00124: Request exceeded the limit of 10 internal redirects due to probable configuration error. Use 'LimitInternalRecursion' to increase the limit if necessary. Use 'LogLevel debug' to get a backtrace., referer: http://localhost:8081/login
+[Mon Jan 06 01:59:11.932268 2025] [core:alert] [pid 20:tid 20] [client 172.25.0.1:55272] /var/www/html/.htaccess: RewriteRule: cannot compile regular expression '\\(css|js|icon|zip|rar|png|jpg|gif|pdf|json)$', referer: http://localhost:8081/login
+[Mon Jan 06 01:59:41.188754 2025] [core:error] [pid 18:tid 18] [client 172.25.0.1:64220] AH00124: Request exceeded the limit of 10 internal redirects due to probable configuration error. Use 'LimitInternalRecursion' to increase the limit if necessary. Use 'LogLevel debug' to get a backtrace., referer: http://localhost:8081/login
+[Mon Jan 06 01:59:52.131860 2025] [core:error] [pid 21:tid 21] [client 172.25.0.1:58598] AH00124: Request exceeded the limit of 10 internal redirects due to probable configuration error. Use 'LimitInternalRecursion' to increase the limit if necessary. Use 'LogLevel debug' to get a backtrace., referer: http://localhost:8081/login
+[Mon Jan 06 01:59:53.058446 2025] [core:error] [pid 22:tid 22] [client 172.25.0.1:58614] AH00124: Request exceeded the limit of 10 internal redirects due to probable configuration error. Use 'LimitInternalRecursion' to increase the limit if necessary. Use 'LogLevel debug' to get a backtrace., referer: http://localhost:8081/login
+[Mon Jan 06 02:03:48.543191 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.25.0.3. Set the 'ServerName' directive globally to suppress this message
+[Mon Jan 06 02:03:57.902469 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.15 configured -- resuming normal operations
+[Mon Jan 06 02:03:57.902639 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Jan 06 02:07:13.966083 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.25.0.3. Set the 'ServerName' directive globally to suppress this message
+[Mon Jan 06 02:07:28.365481 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.15 configured -- resuming normal operations
+[Mon Jan 06 02:07:28.365588 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Jan 06 02:10:20.035085 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.25.0.3. Set the 'ServerName' directive globally to suppress this message
+[Mon Jan 06 02:10:41.873345 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.15 configured -- resuming normal operations
+[Mon Jan 06 02:10:41.873439 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Jan 06 02:12:03.280090 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.25.0.3. Set the 'ServerName' directive globally to suppress this message
+[Mon Jan 06 02:12:04.553150 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.15 configured -- resuming normal operations
+[Mon Jan 06 02:12:04.553218 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Jan 06 02:14:24.279223 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.25.0.3. Set the 'ServerName' directive globally to suppress this message
+[Mon Jan 06 02:14:38.767902 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.15 configured -- resuming normal operations
+[Mon Jan 06 02:14:38.768009 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Jan 06 02:17:56.301114 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.25.0.3. Set the 'ServerName' directive globally to suppress this message
+[Mon Jan 06 02:18:04.262913 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.15 configured -- resuming normal operations
+[Mon Jan 06 02:18:04.262990 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
