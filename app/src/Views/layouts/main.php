@@ -1,9 +1,3 @@
-<?php
-
-use App\CSS\Styles;
-
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 

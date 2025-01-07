@@ -1,7 +1,7 @@
-<form action="/login" method="POST" class="page-connexion">
+<form action="/login" method="POST" class="page-connexion p-8 bg-grey">
     <div id="titre">
         <h1>
-            Connexion à votre compte
+            Connexion
         </h1>
     </div>
     <p class="h-7 <?php echo $messageColor ?>">
