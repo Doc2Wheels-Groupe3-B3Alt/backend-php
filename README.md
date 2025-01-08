@@ -5,9 +5,9 @@
 ```bash
 docker compose up -d --build
 
-docker compose exec php-framework composer install
+docker compose exec web composer install
 
-docker compose exec php-framework composer dump-autoload
+docker compose exec web composer dump-autoload
 ```
 
 ## Etape 2: Lancement du container bdd dans le terminal
