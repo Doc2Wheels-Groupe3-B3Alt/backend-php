@@ -1,7 +1,7 @@
 {
-  "host": "php-framework-db",
-  "user": "root",
-  "password": "password",
-  "database": "db",
-  "port": 3306
+    "host": "db",
+    "user": "user",
+    "password": "password",
+    "database": "db",
+    "port": 5432
 }

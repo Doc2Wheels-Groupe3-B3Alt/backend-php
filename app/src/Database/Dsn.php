@@ -28,7 +28,7 @@ class Dsn
 
     public function getDsn(): string
     {
-        return "mysql:host={$this->host};dbname={$this->database};port={$this->port}";
+        return "pgsql:host={$this->host};dbname={$this->database};port={$this->port}";
     }
 
     public function getPassword(): string

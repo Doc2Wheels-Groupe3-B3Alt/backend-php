@@ -11,11 +11,12 @@ docker compose exec web composer dump-autoload
 ```
 
 ## Etape 2: Lancement du container bdd dans le terminal
+
 ```bash
 docker exec -it projetPEC-db bash
 ```
 
-## Etape 3: Utiliser mysql avec le terminal 
+## Etape 3: Utiliser mysql avec le terminal
 
 ### Fichier init.sql: backend-php/mysql/db
 
@@ -23,36 +24,27 @@ docker exec -it projetPEC-db bash
 
 ```bash
 docker start projetPEC-db
-````
+```
 
-**Ensuite, se connecter à mysql:**
-
-```bash
-docker exec -it projetPEC-db mysql -u root -p
-Enter password: password
-````
-**Afficher les bases de données:**
+**Ensuite, se connecter à postgres et à la base de donnée db:**
 
 ```bash
-SHOW DATABES;
-````
-**Se connecter à la base de donnée "db":**
+docker exec -it projetPEC-db psql -U user -d db
+```
 
-```bash
-USE db;
-````
-
-**Pour quitter mysql:**
+**Pour quitter postgres:**
 
 ```bash
 exit
-````
+```
 
 ## Etape 4: Accéder à la partie front-end
+
 **Si le container n'est pas lancé:**
+
 ```bash
 docker start projetPEC
-````
+```
 
 **URL: http://127.0.0.1:8081/homepage**
 
@@ -66,16 +58,16 @@ docker start projetPEC
 
 ## Table of content
 
-- [PHP Framework](#php-framework)
-  - [Table of content](#table-of-content)
-  - [Step 1](#step-1)
-  - [Step 2](#step-2)
-  - [Step 3](#step-3)
-  - [Step 4](#step-4)
-  - [Step 5](#step-5)
-  - [Step 6](#step-6)
-  - [Step 7](#step-7)
-  - [Step 8](#step-8)
+-   [PHP Framework](#php-framework)
+    -   [Table of content](#table-of-content)
+    -   [Step 1](#step-1)
+    -   [Step 2](#step-2)
+    -   [Step 3](#step-3)
+    -   [Step 4](#step-4)
+    -   [Step 5](#step-5)
+    -   [Step 6](#step-6)
+    -   [Step 7](#step-7)
+    -   [Step 8](#step-8)
 
 ## Step 1
 

@@ -11,14 +11,16 @@ services:
             - db
     db:
         container_name: projetPEC-db
-        image: mysql:latest
+        image: postgres:latest
+        restart: always
         environment:
-            MYSQL_DATABASE: "db"
-            MYSQL_USER: "user"
-            MYSQL_PASSWORD: "password"
-            MYSQL_ROOT_PASSWORD: "password"
+            POSTGRES_DB: "db"
+            POSTGRES_USER: "user"
+            POSTGRES_PASSWORD: "password"
         ports:
-            - 3308:3306
+            - 5444:5432
         volumes:
-            - ./mysql:/var/lib/mysql
-            - ./mysql/db:/docker-entrypoint-initdb.d
+            - db:/var/lib/postgresql/data
+            - ./db/init:/docker-entrypoint-initdb.d
+volumes:
+    db:

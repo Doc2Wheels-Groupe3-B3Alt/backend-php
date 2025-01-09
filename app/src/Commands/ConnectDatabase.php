@@ -11,9 +11,8 @@ class ConnectDatabase
     public function execute()
     {
         try {
-
             $dsn = new Dsn();
-            $db = new \PDO("mysql:host={$dsn->getHost()};dbname={$dsn->getDbName()};port={$dsn->getPort()}", $dsn->getUser(), $dsn->getPassword());
+            $db = new \PDO("pgsql:host={$dsn->getHost()};dbname={$dsn->getDbName()};port={$dsn->getPort()}", $dsn->getUser(), $dsn->getPassword());
             return $db;
         } catch (\PDOException $e) {
             echo $e->getMessage();
