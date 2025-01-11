@@ -28,6 +28,8 @@ class RegisterController extends AbstractController
                 $messageColor = "c-red";
             }
             $username = RemoveSpecialChar($_POST['username']);
+            $nom = RemoveSpecialChar($_POST['nom']);
+            $prenom = RemoveSpecialChar($_POST['prenom']);
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $email = ($_POST['email']);
 
@@ -37,10 +39,12 @@ class RegisterController extends AbstractController
             $testUniqueEmail = $db->query("SELECT * FROM Utilisateurs WHERE email='$email'");
             $resultEmail = $testUniqueEmail->rowCount();
 
-            $stmt = $db->prepare("INSERT INTO Utilisateurs (username, password, email) VALUES (:username, :password, :email)");
+            $stmt = $db->prepare("INSERT INTO Utilisateurs (username, password, email, nom, prenom) VALUES (:username, :password, :email, :nom, :prenom)");
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':password', $password);
             $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':nom', $nom);
+            $stmt->bindParam(':prenom', $prenom);
 
             if (!$resultUsername == 0) {
                 $message = "Cet identifiant est déjà utilisé";
