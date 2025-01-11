@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Http\Request;
 use App\Http\Response;
-use App\Database\Dsn;
 use App\Commands\ConnectDatabase;
 
 class RegisterController extends AbstractController
@@ -16,7 +15,6 @@ class RegisterController extends AbstractController
 
     private function register()
     {
-        // error_reporting(0);
         $db = (new ConnectDatabase())->execute();
         function RemoveSpecialChar($str)
         {
@@ -33,22 +31,17 @@ class RegisterController extends AbstractController
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $email = ($_POST['email']);
 
-            $testUniqueUsername = $db->query("SELECT * FROM users WHERE username='$username'");
+            $testUniqueUsername = $db->query("SELECT * FROM Utilisateurs WHERE username='$username'");
             $resultUsername = $testUniqueUsername->rowCount();
 
-            $testUniqueEmail = $db->query("SELECT * FROM users WHERE email='$email'");
+            $testUniqueEmail = $db->query("SELECT * FROM Utilisateurs WHERE email='$email'");
             $resultEmail = $testUniqueEmail->rowCount();
 
-            $stmt = $db->prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :email)");
+            $stmt = $db->prepare("INSERT INTO Utilisateurs (username, password, email) VALUES (:username, :password, :email)");
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':password', $password);
             $stmt->bindParam(':email', $email);
 
-            // if ($db->query("SELECT * FROM users WHERE username='$username'")) {
-            //     echo "Cet identifiant est déjà utilisé";
-            // }
-
-            // Régler erreur "Undefined variable: message"
             if (!$resultUsername == 0) {
                 $message = "Cet identifiant est déjà utilisé";
                 $messageColor = "c-red";

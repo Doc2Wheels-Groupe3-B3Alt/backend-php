@@ -20,13 +20,13 @@ class LoginController extends AbstractController
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $stmt = $db->prepare("SELECT * FROM users WHERE username = :username");
+            $stmt = $db->prepare("SELECT * FROM Utilisateurs WHERE username = :username");
             $stmt->bindParam(':username', $username);
             $stmt->execute();
 
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            $email = $db->query("SELECT email FROM users WHERE email='$username'")->fetchColumn();
+            $email = $db->query("SELECT email FROM Utilisateurs WHERE email='$username'")->fetchColumn();
 
             if ($email || $user && password_verify($password, $user['password'])) {
                 $message = "Connexion réussie";
