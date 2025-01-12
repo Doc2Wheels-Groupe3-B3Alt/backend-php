@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @layer base, components, utilities;
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -1199,6 +1200,28 @@ body {
         flex-direction: column;
         align-items: center;
         height: 100vh;
+    }
+    .check-password-false {
+        color: var(--grey);
+        list-style-type: none;
+    }
+    .check-password-false::before {
+        content: "•";
+        color: var(--grey);
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+    }
+    .check-password-true {
+        color: var(--green);
+        list-style-type: none;
+    }
+    .check-password-true::before {
+        content: "✔";
+        color: var(--green);
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
     }
 }
 

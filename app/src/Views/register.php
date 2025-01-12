@@ -15,6 +15,9 @@
         <input type="text" class="input" minlength="1" name="nom" placeholder="Nom" />
         <input type="text" class="input" minlength="1" name="prenom" placeholder="Prénom" />
         <input type="password" class="input" placeholder="Mot de passe" minlength="8" name="password" />
+        <ul>
+            <li class="<?php echo $checkPasswordNmbChar ?>">8 caractères minimum</li>
+        </ul>
         <input type="submit" value="Confirmer" class="button bg-light-grey c-black ml-8 mr-8">
     </div>
 </form>

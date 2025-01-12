@@ -46,6 +46,11 @@ class RegisterController extends AbstractController
             $stmt->bindParam(':nom', $nom);
             $stmt->bindParam(':prenom', $prenom);
 
+            $checkPasswordNmbChar = "check-password-false";
+            if (strlen($_POST['password']) >= 8) {
+                $checkPasswordNmbChar = "check-password-true";
+            } else
+
             if (!$resultUsername == 0) {
                 $message = "Cet identifiant est déjà utilisé";
                 $messageColor = "c-red";
