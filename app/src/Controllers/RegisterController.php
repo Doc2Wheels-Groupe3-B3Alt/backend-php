@@ -49,7 +49,7 @@ class RegisterController extends AbstractController
             $checkPasswordNmbChar = "check-password-false";
             if (strlen($_POST['password']) >= 8) {
                 $checkPasswordNmbChar = "check-password-true";
-            } else
+            }
 
             if (!$resultUsername == 0) {
                 $message = "Cet identifiant est déjà utilisé";

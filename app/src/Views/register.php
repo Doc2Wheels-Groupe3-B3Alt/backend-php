@@ -1,4 +1,4 @@
-<form action="" method="POST" class="page-connexion p-8 bg-grey">
+<form action="/register" method="POST" class="page-connexion p-8 bg-grey">
     <div id="titre">
         <h1>
             Inscription
