@@ -69,6 +69,6 @@ class RegisterController extends AbstractController
             }
         }
 
-        return new Response('register', 200, get_defined_vars());
+        return $this->render('register', get_defined_vars());
     }
 }

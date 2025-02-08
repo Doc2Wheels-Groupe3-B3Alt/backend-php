@@ -8,13 +8,9 @@ class Response
     private int $status;
     private array $headers;
 
-    public function __construct(string $content = '', int $status = 200, array $params = [], array $headers = [])
+    public function __construct(string $content = '', int $status = 200, array $headers = [])
     {
-        if ($this->viewExists($content)) {
-            $this->content = $this->renderView($content, $params);
-        } else {
-            $this->content = $content;
-        }
+        $this->content = $content;
         $this->status = $status;
         $this->headers = $headers;
     }
@@ -45,35 +41,6 @@ class Response
     public function getHeaders(): array
     {
         return $this->headers;
-    }
-
-    public function renderView($view, $params = [])
-    {
-        $layoutContent = $this->layoutContent();
-        $viewContent = $this->renderOnlyView($view, $params);
-        return str_replace('{{content}}', $viewContent, $layoutContent);
-    }
-
-    protected function layoutContent()
-    {
-        ob_start();
-        include __DIR__ . '/../Views/layouts/main.php';
-        return ob_get_clean();
-    }
-
-    protected function renderOnlyView($view, $params)
-    {
-        foreach ($params as $key => $value) {
-            $$key = $value;
-        }
-        ob_start();
-        include __DIR__ . "/../Views/$view.php";
-        return ob_get_clean();
-    }
-
-    private function viewExists($view)
-    {
-        return file_exists(__DIR__ . "/../Views/$view.php");
     }
 
     public function setContent(string $content): self

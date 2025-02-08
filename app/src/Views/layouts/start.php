@@ -20,9 +20,3 @@
 		</div>
 		<img class="navbar-profil" src="/src/Images/Avatar.png" alt="Avatar" />
 	</nav>
-
-	{{content}}
-
-</body>
-
-</html>

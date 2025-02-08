@@ -14,7 +14,7 @@
         <input type="email" class="input" minlength="1" name="email" placeholder="Email" />
         <input type="text" class="input" minlength="1" name="nom" placeholder="Nom" />
         <input type="text" class="input" minlength="1" name="prenom" placeholder="Prénom" />
-        <input type="password" class="input" placeholder="Mot de passe" minlength="8" name="password" />
+        <input type="password" class="input" placeholder="Mot de passe"  name="password" />
         <ul>
             <li class="<?php echo $checkPasswordNmbChar ?>">8 caractères minimum</li>
         </ul>
