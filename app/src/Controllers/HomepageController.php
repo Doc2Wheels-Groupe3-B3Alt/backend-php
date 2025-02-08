@@ -14,6 +14,6 @@ class HomepageController extends AbstractController
 
     private function homepage()
     {
-        return new Response('homepage', 200);
+        return $this->render('homepage');
     }
 }

@@ -46,9 +46,10 @@ class RegisterController extends AbstractController
             $stmt->bindParam(':nom', $nom);
             $stmt->bindParam(':prenom', $prenom);
 
-            $checkPasswordNmbChar = "check-password-false";
             if (strlen($_POST['password']) >= 8) {
                 $checkPasswordNmbChar = "check-password-true";
+            } else {
+                $checkPasswordNmbChar = "check-password-false";
             }
 
             if (!$resultUsername == 0) {
@@ -60,6 +61,9 @@ class RegisterController extends AbstractController
             } else {
                 if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
                     $message = "Veuillez remplir tous les champs";
+                    $messageColor = "c-red";
+                } elseif (strlen($_POST['password']) <= 8) {
+                    $message = "Le mot de passe doit comporter au moins 8 caractères";
                     $messageColor = "c-red";
                 } else {
                     $stmt->execute();

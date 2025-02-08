@@ -37,6 +37,6 @@ class LoginController extends AbstractController
             }
         }
 
-        return new Response('login', 200, get_defined_vars());
+        return $this->render('login', get_defined_vars());
     }
 }
