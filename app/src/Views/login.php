@@ -13,5 +13,6 @@
         <input type="text" class="input" minlength="1" name="username" placeholder="Username or Email" />
         <input type="password" class="input" placeholder="Password" minlength="8" name="password" />
         <input type="submit" value="Confirmer" class="button bg-light-grey c-black ml-8 mr-8">
+        <p>Pas encore inscrit ? <a href="/register">Inscrivez-vous</a></p>
     </div>
 </form>
