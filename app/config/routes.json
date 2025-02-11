@@ -23,5 +23,10 @@
     "path": "/admin",
     "methods": ["GET"],
     "controller": "AdminController"
+  },
+  {
+    "path": "/admin/utilisateurs",
+    "methods": ["GET"],
+    "controller": "AdminUtilisateursController"
   }
 ]
