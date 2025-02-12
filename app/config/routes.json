@@ -15,6 +15,11 @@
     "controller": "RegisterController"
   },
   {
+    "path": "/logout",
+    "methods": ["POST"],
+    "controller": "LogoutController"
+  },
+  {
     "path": "/homepage",
     "methods": ["GET"],
     "controller": "HomepageController"

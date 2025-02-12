@@ -10,6 +10,12 @@ class LoginController extends AbstractController
 {
     public function process(Request $request): Response
     {
+        $this->startSessionIfNeeded();
+
+        if ($this->isLoggedIn()) {
+            return $this->redirect('/homepage');
+        }
+
         return $this->login();
     }
 
@@ -29,6 +35,15 @@ class LoginController extends AbstractController
             $email = $db->query("SELECT email FROM Utilisateurs WHERE email='$username'")->fetchColumn();
 
             if ($email || $user && password_verify($password, $user['password'])) {
+                session_regenerate_id(true);
+
+                $_SESSION['user'] = [
+                    'id' => $user['id'],
+                    'username' => $user['username'],
+                    'admin' => (bool)$user['admin']
+                ];
+                return $this->redirect('/homepage');
+
                 $message = "Connexion réussie";
                 $messageColor = "c-green";
             } else {

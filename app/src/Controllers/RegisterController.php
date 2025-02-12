@@ -10,6 +10,12 @@ class RegisterController extends AbstractController
 {
     public function process(Request $request): Response
     {
+        session_start();
+
+        if ($this->isLoggedIn()) {
+            return $this->redirect('/homepage');
+        }
+
         return $this->register();
     }
 
@@ -70,6 +76,16 @@ class RegisterController extends AbstractController
                     $message = "Inscription réussie";
                     $messageColor = "c-green";
                 }
+            }
+
+            if ($stmt->execute()) {
+                $_SESSION['user'] = [
+                    'id' => $db->lastInsertId(),
+                    'username' => $username,
+                    'admin' => false
+                ];
+
+                return $this->redirect('/homepage');
             }
         }
 
