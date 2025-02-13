@@ -9,6 +9,7 @@ class HomepageController extends AbstractController
 {
     public function process(Request $request): Response
     {
+        $this->startSessionIfNeeded();
         return $this->homepage();
     }
 

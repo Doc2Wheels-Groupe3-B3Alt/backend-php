@@ -26,26 +26,23 @@ class LoginController extends AbstractController
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $stmt = $db->prepare("SELECT * FROM Utilisateurs WHERE username = :username");
+            $stmt = $db->prepare("SELECT * FROM Utilisateurs WHERE username = :username OR email = :username");
             $stmt->bindParam(':username', $username);
             $stmt->execute();
 
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            $email = $db->query("SELECT email FROM Utilisateurs WHERE email='$username'")->fetchColumn();
+            if ($user && password_verify($password, $user['password'])) {
+                $message = "Connexion réussie";
+                $messageColor = "c-green";
 
-            if ($email || $user && password_verify($password, $user['password'])) {
                 session_regenerate_id(true);
-
                 $_SESSION['user'] = [
                     'id' => $user['id'],
                     'username' => $user['username'],
-                    'admin' => (bool)$user['admin']
+                    'admin' => $user['admin']
                 ];
                 return $this->redirect('/homepage');
-
-                $message = "Connexion réussie";
-                $messageColor = "c-green";
             } else {
                 $message = "Identifiant ou mot de passe incorrect";
                 $messageColor = "c-red";

@@ -64,21 +64,17 @@ class RegisterController extends AbstractController
             } elseif (!$resultEmail == 0) {
                 $message = "Cet email est déjà utilisé";
                 $messageColor = "c-red";
+            } elseif (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+                $message = "Veuillez remplir tous les champs";
+                $messageColor = "c-red";
+            } elseif (strlen($_POST['password']) <= 8) {
+                $message = "Le mot de passe doit comporter au moins 8 caractères";
+                $messageColor = "c-red";
             } else {
-                if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
-                    $message = "Veuillez remplir tous les champs";
-                    $messageColor = "c-red";
-                } elseif (strlen($_POST['password']) <= 8) {
-                    $message = "Le mot de passe doit comporter au moins 8 caractères";
-                    $messageColor = "c-red";
-                } else {
-                    $stmt->execute();
-                    $message = "Inscription réussie";
-                    $messageColor = "c-green";
-                }
-            }
+                $stmt->execute();
+                $message = "Inscription réussie";
+                $messageColor = "c-green";
 
-            if ($stmt->execute()) {
                 $_SESSION['user'] = [
                     'id' => $db->lastInsertId(),
                     'username' => $username,
