@@ -1,37 +1,47 @@
 [
-  {
-    "path": "/test",
-    "methods": ["GET"],
-    "controller": "TestController"
-  },
-  {
-    "path": "/login",
-    "methods": ["GET", "POST"],
-    "controller": "LoginController"
-  },
-  {
-    "path": "/register",
-    "methods": ["GET", "POST"],
-    "controller": "RegisterController"
-  },
-  {
-    "path": "/logout",
-    "methods": ["POST"],
-    "controller": "LogoutController"
-  },
-  {
-    "path": "/homepage",
-    "methods": ["GET"],
-    "controller": "HomepageController"
-  },
-  {
-    "path": "/admin",
-    "methods": ["GET"],
-    "controller": "AdminController"
-  },
-  {
-    "path": "/admin/utilisateurs",
-    "methods": ["GET"],
-    "controller": "AdminUtilisateursController"
-  }
+    {
+        "path": "/test",
+        "methods": ["GET"],
+        "controller": "TestController"
+    },
+    {
+        "path": "/login",
+        "methods": ["GET", "POST"],
+        "controller": "LoginController"
+    },
+    {
+        "path": "/register",
+        "methods": ["GET", "POST"],
+        "controller": "RegisterController"
+    },
+    {
+        "path": "/logout",
+        "methods": ["POST"],
+        "controller": "LogoutController"
+    },
+    {
+        "path": "/homepage",
+        "methods": ["GET"],
+        "controller": "HomepageController"
+    },
+    {
+        "path": "/admin",
+        "methods": ["GET"],
+        "controller": "AdminController"
+    },
+    {
+        "path": "/admin/utilisateurs",
+        "methods": ["GET"],
+        "controller": "AdminUsersController"
+    },
+    {
+        "path": "/admin/utilisateurs/delete",
+        "methods": ["POST"],
+        "controller": "AdminUserDeleteController"
+    },
+    {
+        "path": "/admin/utilisateurs/edit",
+        "methods": ["GET", "POST"],
+        "controller": "AdminUserEditController"
+    }
 ]

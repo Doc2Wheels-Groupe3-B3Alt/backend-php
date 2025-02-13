@@ -19,6 +19,6 @@
             <li class="<?php echo $checkPasswordNmbChar ?>">8 caractères minimum</li>
         </ul>
         <input type="submit" value="Confirmer" class="button bg-light-grey c-black ml-8 mr-8">
-        <p>Déjà inscrit ? <a href="/register">Connectez-vous</a></p>
+        <p>Déjà inscrit ? <a href="/login">Connectez-vous</a></p>
     </div>
 </form>

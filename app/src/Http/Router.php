@@ -59,11 +59,12 @@ class Router
     // modification de la fonction checkUri pour faire marcher les controller prenant en compte un email précis
     private static function checkUri(Request $request, object $route): bool
     {
+        $requestUri = parse_url($request->getUri(), PHP_URL_PATH);
         $routePath = preg_replace('/:\w+/', '([^/]+)', $route->path);
         $routePath = str_replace('/', '\/', $routePath);
         $pattern = '/^' . $routePath . '$/';
 
-        return preg_match($pattern, $request->getUri());
+        return preg_match($pattern,/*$request->getUri()*/ $requestUri);
     }
 
     private static function getController(object $route): AbstractController
