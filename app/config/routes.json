@@ -43,5 +43,25 @@
         "path": "/admin/utilisateurs/edit",
         "methods": ["GET", "POST"],
         "controller": "AdminUserEditController"
+    },
+    {
+        "path": "/admin/techniciens",
+        "methods": ["GET"],
+        "controller": "AdminTechniciensController"
+    },
+    {
+        "path": "/profil",
+        "methods": ["GET"],
+        "controller": "ProfilController"
+    },
+    {
+        "path": "/profil/edit",
+        "methods": ["GET", "POST"],
+        "controller": "ProfilEditController"
+    },
+    {
+        "path": "/profil/technicien",
+        "methods": ["GET", "POST"],
+        "controller": "BeTechnicienController"
     }
 ]

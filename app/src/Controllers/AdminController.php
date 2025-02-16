@@ -15,7 +15,7 @@ class AdminController extends AbstractController
 
     private function admin()
     {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['admin'] !== 'admin') {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
             return $this->redirect('/homepage');
         } else {
             return $this->render('admin');

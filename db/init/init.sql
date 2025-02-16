@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS Utilisateurs (
     nom VARCHAR(255) NOT NULL,
     prenom VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    admin VARCHAR(50) DEFAULT 'user',
+    -- roles: technicien, user, admin
+    role VARCHAR(50) DEFAULT 'user',
     date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     adresse_id INT,
     intervenant_id INT,

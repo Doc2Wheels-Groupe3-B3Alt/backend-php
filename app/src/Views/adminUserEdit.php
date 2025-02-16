@@ -20,7 +20,7 @@
         <input type="password" name="password" id="password" <?= isset($user) ? '' : 'required' ?>>
 
         <label for="admin">Administrateur :</label>
-        <input type="checkbox" name="admin" id="admin" <?= isset($user) && $user['admin'] === 'admin' ? 'checked' : '' ?>>
+        <input type="checkbox" name="admin" id="admin" <?= isset($user) && $user['role'] === 'admin' ? 'checked' : '' ?>>
 
         <button type="submit" class="button"><?= isset($user) ? 'Modifier' : 'Créer' ?></button>
 

@@ -1,7 +1,7 @@
 <section class="table-page">
     <h1>Gestion des Utilisateurs</h1>
 
-    <a href="/admin/utilisateurs/edit" class="button button-sm bg-green">Créer un utilisateur</a>
+    <a href="/admin/techniciens/edit" class="button button-sm bg-green">Créer un utilisateur</a>
     <table class="table">
         <thead>
             <tr>
@@ -12,6 +12,7 @@
                 <th>Prénom</th>
                 <th>Rôles</th>
                 <th>Date création</th>
+                <th>HorairesTravail</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,6 +26,7 @@
                     <td><?= htmlspecialchars($user['prenom']) ?></td>
                     <td><?= htmlspecialchars($user['role']) ?></td>
                     <td><?= htmlspecialchars($user['date_creation']) ?></td>
+                    <td><?= htmlspecialchars($user['heure_debut']) ?> - <?= htmlspecialchars($user['heure_fin']) ?></td>
                     <td class="actions">
                         <a href="/admin/utilisateurs/edit?id=<?= $user['id'] ?>" class="button button-sm bg-blue c-white">Modifier</a>
                         <form action="/admin/utilisateurs/delete" method="POST">

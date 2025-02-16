@@ -12,7 +12,7 @@ class AdminUserEditController extends AbstractController
     {
         $this->startSessionIfNeeded();
 
-        if (!isset($_SESSION['user']) || $_SESSION['user']['admin'] !== 'admin') {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
             return $this->redirect('/homepage');
         }
         if ($request->getMethod() === 'POST') {
@@ -50,18 +50,18 @@ class AdminUserEditController extends AbstractController
             $username = trim($_POST['username']);
             $email = trim($_POST['email']);
             $password = !empty($_POST['password']) ? password_hash($_POST['password'], PASSWORD_BCRYPT) : null;
-            $admin = isset($_POST['admin']) ? 'admin' : 'user';
+            $role = isset($_POST['role']) ? 'admin' : 'user';
 
             if ($id) {
                 if ($password) {
-                    $stmt = $db->prepare("UPDATE Utilisateurs SET prenom = :prenom, nom = :nom, username = :username, email = :email, password = :password, admin = :admin WHERE id = :id");
+                    $stmt = $db->prepare("UPDATE Utilisateurs SET prenom = :prenom, nom = :nom, username = :username, email = :email, password = :password, role = :role WHERE id = :id");
                     $stmt->bindParam(':password', $password);
                 } else {
-                    $stmt = $db->prepare("UPDATE Utilisateurs SET prenom = :prenom, nom = :nom, username = :username, email = :email, admin = :admin WHERE id = :id");
+                    $stmt = $db->prepare("UPDATE Utilisateurs SET prenom = :prenom, nom = :nom, username = :username, email = :email, role = :role WHERE id = :id");
                 }
                 $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
             } else {
-                $stmt = $db->prepare("INSERT INTO Utilisateurs (prenom, nom, username, email, password, admin) VALUES (:prenom, :nom, :username, :email, :password, :admin)");
+                $stmt = $db->prepare("INSERT INTO Utilisateurs (prenom, nom, username, email, password, role) VALUES (:prenom, :nom, :username, :email, :password, :role)");
                 $stmt->bindParam(':password', $password);
             }
 
@@ -69,11 +69,11 @@ class AdminUserEditController extends AbstractController
             $stmt->bindParam(':nom', $nom);
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':admin', $admin);
+            $stmt->bindParam(':role', $role);
             $stmt->execute();
         }
 
-        if (!isset($_SESSION['user']) || $_SESSION['user']['admin'] !== 'admin') {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
             return $this->redirect('/homepage');
         } else {
             return $this->redirect('/admin/utilisateurs');

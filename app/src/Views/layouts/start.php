@@ -24,7 +24,7 @@
                 <?php
                 $this->startSessionIfNeeded();
                 if (isset($_SESSION['user'])) : ?>
-                    <?php if ($_SESSION['user']['admin'] === 'admin') : ?>
+                    <?php if ($_SESSION['user']['role'] === 'admin') : ?>
                         <a href="/admin">Admin</a>
                     <?php endif; ?>
                     <a href="/profil">Profil</a>

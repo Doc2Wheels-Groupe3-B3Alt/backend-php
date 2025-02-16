@@ -11,7 +11,7 @@ class AdminUserDeleteController extends AbstractController
     public function process(Request $request): Response
     {
         $this->startSessionIfNeeded();
-        if (!isset($_SESSION['user']) || $_SESSION['user']['admin'] !== 'admin') {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
             return $this->redirect('/homepage');
         } else {
             return $this->deleteUser();
@@ -22,7 +22,7 @@ class AdminUserDeleteController extends AbstractController
     {
         $this->startSessionIfNeeded();
 
-        if (!isset($_SESSION['user']) || $_SESSION['user']['admin'] !== 'admin') {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
             return $this->redirect('/homepage');
         }
 

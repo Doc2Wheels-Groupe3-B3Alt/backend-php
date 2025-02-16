@@ -6,15 +6,15 @@ use App\Http\Request;
 use App\Http\Response;
 use App\Commands\ConnectDatabase;
 
-class AdminUsersController extends AbstractController
+class AdminTechniciensController extends AbstractController
 {
     public function process(Request $request): Response
     {
         $this->startSessionIfNeeded();
-        return $this->adminUser();
+        return $this->adminTechnicien();
     }
 
-    private function adminUser()
+    private function adminTechnicien()
     {
         $db = (new ConnectDatabase())->execute();
 
@@ -25,21 +25,26 @@ class AdminUsersController extends AbstractController
 
         $users = $db->query("
             SELECT 
-                id,
-                username,
-                email,
-                nom,
-                prenom,
-                role,
-                TO_CHAR(date_creation, 'DD/MM/YYYY HH24:MI') as date_creation
-            FROM Utilisateurs
-            ORDER BY date_creation DESC
+                u.id,
+                u.username,
+                u.email,
+                u.nom,
+                u.prenom,
+                u.role,
+                TO_CHAR(u.date_creation, 'DD/MM/YYYY HH24:MI') as date_creation,
+                ht.heure_debut,
+                ht.heure_fin
+            FROM Utilisateurs u
+            LEFT JOIN Intervenants i ON u.intervenant_id = i.id
+            LEFT JOIN HorairesTravail ht ON i.horaire_id = ht.id
+            WHERE u.role = 'technicien'
+            ORDER BY u.date_creation DESC
         ")->fetchAll(\PDO::FETCH_ASSOC);
 
         if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
             return $this->redirect('/homepage');
         } else {
-            return $this->render('adminUtilisateurs', get_defined_vars());
+            return $this->render('adminTechniciens', get_defined_vars());
         }
     }
 }

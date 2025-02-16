@@ -78,7 +78,7 @@ class RegisterController extends AbstractController
                 $_SESSION['user'] = [
                     'id' => $db->lastInsertId(),
                     'username' => $username,
-                    'admin' => false
+                    'role' => 'user'
                 ];
 
                 return $this->redirect('/homepage');

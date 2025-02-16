@@ -40,7 +40,7 @@ class LoginController extends AbstractController
                 $_SESSION['user'] = [
                     'id' => $user['id'],
                     'username' => $user['username'],
-                    'admin' => $user['admin']
+                    'role' => $user['role']
                 ];
                 return $this->redirect('/homepage');
             } else {
