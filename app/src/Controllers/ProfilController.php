@@ -10,7 +10,7 @@ class ProfilController extends AbstractController
 {
     public function process(Request $request): Response
     {
-        $this->checkAuth();
+        $this->startSessionIfNeeded();
         $db = (new ConnectDatabase())->execute();
 
         $stmt = $db->prepare("

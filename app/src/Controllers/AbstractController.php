@@ -9,17 +9,6 @@ abstract class AbstractController
 {
     abstract public function process(Request $request): Response;
 
-    public function checkAuth()
-    {
-        session_start();
-
-        if (!isset($_SESSION['user'])) {
-            return new Response('', 302, ['Location' => '/login']);
-        }
-
-        return true;
-    }
-
     protected function startSessionIfNeeded(): void
     {
         if (session_status() === PHP_SESSION_NONE) {

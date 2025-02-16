@@ -15,14 +15,14 @@ class AdminUserEditController extends AbstractController
         if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
             return $this->redirect('/homepage');
         }
-        if ($request->getMethod() === 'POST') {
-            return $this->saveUser($request);
-        }
+
         return $this->editUser($request);
     }
 
-    private function editUser(Request $request): Response
+    public function editUser(Request $request): Response
     {
+        $this->startSessionIfNeeded();
+
         $db = (new ConnectDatabase())->execute();
         $user = null;
 
@@ -33,13 +33,6 @@ class AdminUserEditController extends AbstractController
             $stmt->execute();
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
         }
-
-        return $this->render('adminUserEdit', get_defined_vars());
-    }
-
-    public function saveUser(Request $request): Response
-    {
-        $this->startSessionIfNeeded();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $db = (new ConnectDatabase())->execute();
@@ -71,12 +64,10 @@ class AdminUserEditController extends AbstractController
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':role', $role);
             $stmt->execute();
-        }
 
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
-            return $this->redirect('/homepage');
-        } else {
             return $this->redirect('/admin/utilisateurs');
         }
+
+        return $this->render('adminUserEdit', get_defined_vars());
     }
 }

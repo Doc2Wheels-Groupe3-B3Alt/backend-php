@@ -6,46 +6,44 @@ use App\Http\Request;
 use App\Http\Response;
 use App\Commands\ConnectDatabase;
 
-class EditProfilController extends AbstractController
+class ProfilEditController extends AbstractController
 {
     public function process(Request $request): Response
     {
-        $this->checkAuth();
-        $db = (new ConnectDatabase())->execute();
+        $this->startSessionIfNeeded();
 
-        if ($request->getMethod() === 'POST') {
-            $this->updateUser($db, $request->getPayload());
-            return new Response('', 302, ['Location' => '/profil']);
-        }
-
-        return $this->showForm($db);
+        return $this->updateUser($request);
     }
 
-    private function showForm(\PDO $db): Response
+    private function updateUser(Request $request): Response
     {
-        $user = $db->query("
+        $db = (new ConnectDatabase())->execute();
+
+        $user = $db->query(
+            "
             SELECT * FROM Utilisateurs 
             WHERE id = " . $_SESSION['user']['id']
         )->fetch();
 
-        return $this->render('edit_profil', ['user' => $user]);
-    }
-
-    private function updateUser(\PDO $db, array $data): void
-    {
-        $stmt = $db->prepare("
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $stmt = $db->prepare("
             UPDATE Utilisateurs SET
                 nom = :nom,
                 prenom = :prenom,
                 email = :email
             WHERE id = :id
-        ");
-        
-        $stmt->execute([
-            ':nom' => htmlspecialchars($data['nom']),
-            ':prenom' => htmlspecialchars($data['prenom']),
-            ':email' => filter_var($data['email'], FILTER_SANITIZE_EMAIL),
-            ':id' => $_SESSION['user']['id']
-        ]);
+            ");
+
+            $stmt->execute([
+                ':nom' => htmlspecialchars($_POST['nom']),
+                ':prenom' => htmlspecialchars($_POST['prenom']),
+                ':email' => filter_var($_POST['email'], FILTER_SANITIZE_EMAIL),
+                ':id' => $_SESSION['user']['id']
+            ]);
+
+            $this->redirect('/profil');
+        }
+
+        return $this->render('profilEdit', get_defined_vars());
     }
 }
