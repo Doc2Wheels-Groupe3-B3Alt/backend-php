@@ -67,7 +67,7 @@ class RegisterController extends AbstractController
             } elseif (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
                 $message = "Veuillez remplir tous les champs";
                 $messageColor = "c-red";
-            } elseif (strlen($_POST['password']) <= 8) {
+            } elseif (strlen($_POST['password']) < 8) {
                 $message = "Le mot de passe doit comporter au moins 8 caractères";
                 $messageColor = "c-red";
             } else {

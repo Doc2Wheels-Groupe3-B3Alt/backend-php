@@ -420,3 +420,7 @@ AH00558: apache2: Could not reliably determine the server's fully qualified doma
 [Thu Feb 13 00:42:38.364940 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
 [Thu Feb 13 01:13:05.857515 2025] [autoindex:error] [pid 19:tid 19] [client 172.25.0.1:58902] AH01276: Cannot serve directory /var/www/html/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive
 [Thu Feb 13 01:14:01.663842 2025] [autoindex:error] [pid 22:tid 22] [client 172.25.0.1:64024] AH01276: Cannot serve directory /var/www/html/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.25.0.3. Set the 'ServerName' directive globally to suppress this message
+[Sun Feb 16 13:43:43.887832 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.17 configured -- resuming normal operations
+[Sun Feb 16 13:43:43.887938 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Sun Feb 16 13:45:07.163074 2025] [autoindex:error] [pid 17:tid 17] [client 172.25.0.1:63002] AH01276: Cannot serve directory /var/www/html/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive
