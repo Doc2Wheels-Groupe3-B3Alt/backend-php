@@ -63,3 +63,17 @@ CREATE TABLE IF NOT EXISTS Demandes (
     CONSTRAINT fk_modele FOREIGN KEY (modele_id) REFERENCES Modeles(id) ON DELETE SET NULL,
     CONSTRAINT fk_localisation FOREIGN KEY (localisation_id) REFERENCES Localisations(id) ON DELETE SET NULL
 );
+
+-- Exemple de données
+-- Format des heures : 'HH:MM:SS' ou 'HH:MM'
+INSERT INTO HorairesTravail (heure_debut, heure_fin)
+VALUES 
+  ('08:00:00', '17:00:00'),  -- Horaire classique 8h-17h
+  ('09:30:00', '18:30:00'),  -- Horaire décalé
+  ('13:00:00', '20:00:00');  -- Horaire après-midi
+
+-- Administrateur
+-- remplacer 'username' par le nom d'utilisateur souhaité
+-- UPDATE Utilisateurs 
+-- SET role = 'admin' 
+-- WHERE username = 'username';

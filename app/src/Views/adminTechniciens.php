@@ -1,7 +1,7 @@
 <section class="table-page">
-    <h1>Gestion des Utilisateurs</h1>
+    <h1>Gestion des Techniciens</h1>
 
-    <a href="/admin/techniciens/edit" class="button button-sm bg-green">Créer un utilisateur</a>
+    <a href="/admin/utilisateurs/edit" class="button button-sm bg-green">Créer un technicien</a>
     <table class="table">
         <thead>
             <tr>

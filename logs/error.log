@@ -431,3 +431,32 @@ AH00558: apache2: Could not reliably determine the server's fully qualified doma
 AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.19.0.3. Set the 'ServerName' directive globally to suppress this message
 [Sun Feb 16 19:04:16.137467 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.17 configured -- resuming normal operations
 [Sun Feb 16 19:04:16.137618 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.19.0.3. Set the 'ServerName' directive globally to suppress this message
+[Mon Feb 17 10:00:51.059001 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.17 configured -- resuming normal operations
+[Mon Feb 17 10:00:51.059078 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Feb 17 10:01:00.857883 2025] [autoindex:error] [pid 17:tid 17] [client 172.19.0.1:62602] AH01276: Cannot serve directory /var/www/html/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive
+[Mon Feb 17 10:01:01.716162 2025] [autoindex:error] [pid 18:tid 18] [client 172.19.0.1:62614] AH01276: Cannot serve directory /var/www/html/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive
+[Mon Feb 17 10:05:26.150971 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.19.0.3. Set the 'ServerName' directive globally to suppress this message
+[Mon Feb 17 10:21:39.492977 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.17 configured -- resuming normal operations
+[Mon Feb 17 10:21:39.493054 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Feb 17 10:23:07.852326 2025] [php:notice] [pid 22:tid 22] [client 172.19.0.1:64294] Erreur mise \xc3\xa0 jour : SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at end of input\nLINE 1: DELETE FROM Intervenants WHERE id = \n                                            ^, referer: http://localhost:8081/profil/edit
+[Mon Feb 17 10:29:15.573488 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.19.0.3. Set the 'ServerName' directive globally to suppress this message
+[Mon Feb 17 18:27:41.282670 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.17 configured -- resuming normal operations
+[Mon Feb 17 18:27:41.282761 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Feb 17 18:30:58.101131 2025] [php:notice] [pid 17:tid 17] [client 172.19.0.1:57808] Erreur mise \xc3\xa0 jour : SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at end of input\nLINE 1: DELETE FROM Intervenants WHERE id = \n                                            ^, referer: http://localhost:8081/profil/edit
+[Mon Feb 17 18:31:58.511102 2025] [php:notice] [pid 20:tid 20] [client 172.19.0.1:61568] Erreur mise \xc3\xa0 jour : SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at end of input\nLINE 1: DELETE FROM Intervenants WHERE id = \n                                            ^, referer: http://localhost:8081/profil/edit
+[Mon Feb 17 18:34:37.534516 2025] [php:notice] [pid 17:tid 17] [client 172.19.0.1:56296] Erreur mise \xc3\xa0 jour : SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at end of input\nLINE 1: DELETE FROM Intervenants WHERE id = \n                                            ^, referer: http://localhost:8081/profil/edit
+[Mon Feb 17 19:20:54.422584 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.19.0.3. Set the 'ServerName' directive globally to suppress this message
+[Mon Feb 17 19:20:59.433181 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.17 configured -- resuming normal operations
+[Mon Feb 17 19:20:59.433327 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Feb 17 19:21:25.922769 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.19.0.3. Set the 'ServerName' directive globally to suppress this message
+[Mon Feb 17 19:21:35.116987 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.17 configured -- resuming normal operations
+[Mon Feb 17 19:21:35.117164 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Feb 17 19:31:05.442051 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.19.0.3. Set the 'ServerName' directive globally to suppress this message
+[Mon Feb 17 19:31:09.651252 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.3.17 configured -- resuming normal operations
+[Mon Feb 17 19:31:09.651341 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
