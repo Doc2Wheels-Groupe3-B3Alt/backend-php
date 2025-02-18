@@ -6,16 +6,16 @@ use App\Http\Request;
 use App\Http\Response;
 use App\Commands\ConnectDatabase;
 
-class AdminUserDeleteController extends AbstractController
+class AdminServiceDeleteController extends AbstractController
 {
     public function process(Request $request): Response
     {
         $this->startSessionIfNeeded();
 
-        return $this->deleteUser();
+        return $this->deleteService();
     }
 
-    public function deleteUser(): Response
+    public function deleteService(): Response
     {
         $this->startSessionIfNeeded();
 
@@ -29,18 +29,18 @@ class AdminUserDeleteController extends AbstractController
             $db = (new ConnectDatabase())->execute();
 
             // Vérifie si l'utilisateur existe avant de le supprimer
-            $stmt = $db->prepare("SELECT * FROM Utilisateurs WHERE id = :id");
+            $stmt = $db->prepare("SELECT * FROM Services WHERE id = :id");
             $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
             $stmt->execute();
-            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $service = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            if ($user) {
-                $stmt = $db->prepare("DELETE FROM Utilisateurs WHERE id = :id");
+            if ($service) {
+                $stmt = $db->prepare("DELETE FROM Services WHERE id = :id");
                 $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
                 $stmt->execute();
             }
         }
 
-        return $this->redirect('/admin/utilisateurs');
+        return $this->redirect('/admin/services');
     }
 }

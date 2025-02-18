@@ -35,7 +35,6 @@ class AdminUserEditController extends AbstractController
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $db = (new ConnectDatabase())->execute();
 
             $id = $_POST['id'] ?? null;
             $prenom = trim($_POST['prenom']);

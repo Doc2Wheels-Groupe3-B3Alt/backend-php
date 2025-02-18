@@ -53,6 +53,12 @@ CREATE TABLE IF NOT EXISTS Utilisateurs (
     CONSTRAINT fk_intervenant FOREIGN KEY (intervenant_id) REFERENCES Intervenants(id) ON DELETE SET NULL
 );
 
+CREATE TABLE IF NOT EXISTS Services (
+    id SERIAL PRIMARY KEY,
+    nom VARCHAR(255) NOT NULL,
+    description TEXT
+);
+
 CREATE TABLE IF NOT EXISTS Demandes (
     id SERIAL PRIMARY KEY,
     date_debut TIMESTAMP NOT NULL,
@@ -65,16 +71,9 @@ CREATE TABLE IF NOT EXISTS Demandes (
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES Utilisateurs(id) ON DELETE SET NULL,
     CONSTRAINT fk_intervenant FOREIGN KEY (intervenant_id) REFERENCES Intervenants(id) ON DELETE SET NULL,
     CONSTRAINT fk_modele FOREIGN KEY (modele_id) REFERENCES Modeles(id) ON DELETE SET NULL,
-    CONSTRAINT fk_localisation FOREIGN KEY (localisation_id) REFERENCES Localisations(id) ON DELETE SET NULL
+    CONSTRAINT fk_localisation FOREIGN KEY (localisation_id) REFERENCES Localisations(id) ON DELETE SET NULL,
     CONSTRAINT fk_services FOREIGN KEY (services_id) REFERENCES Services(id) ON DELETE SET NULL
 );
-
-CREATE TABLE IF NOT EXISTS Services (
-    id SERIAL PRIMARY KEY,
-    nom VARCHAR(255) NOT NULL,
-    description TEXT,
-);
-
 
 -- Exemple de données
 -- Format des heures : 'HH:MM:SS' ou 'HH:MM'
@@ -84,9 +83,15 @@ VALUES
   ('09:30:00', '18:30:00'),  -- Horaire décalé
   ('13:00:00', '20:00:00');  -- Horaire après-midi
 
+-- Services
+INSERT INTO Services (nom, description)
+VALUES 
+  ('Réparation', 'Réparation de votre véhicule'),
+  ('Dépannage', 'Dépannage de votre véhicule'),
+  ('Maintenance', 'Maintenance de votre véhicule');
+
 -- Administrateur
 -- remplacer 'username' par le nom d'utilisateur souhaité
 -- UPDATE Utilisateurs 
 -- SET role = 'admin' 
 -- WHERE username = 'username';
-
