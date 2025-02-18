@@ -46,6 +46,9 @@ CREATE TABLE IF NOT EXISTS Utilisateurs (
     date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     adresse_id INT,
     intervenant_id INT,
+    is_verified BOOLEAN NOT NULL DEFAULT FALSE,
+    verification_token VARCHAR(255),
+    verification_expires TIMESTAMP,
     CONSTRAINT fk_adresse FOREIGN KEY (adresse_id) REFERENCES Adresses(id) ON DELETE SET NULL,
     CONSTRAINT fk_intervenant FOREIGN KEY (intervenant_id) REFERENCES Intervenants(id) ON DELETE SET NULL
 );

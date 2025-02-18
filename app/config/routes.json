@@ -63,5 +63,10 @@
         "path": "/profil/technicien",
         "methods": ["GET", "POST"],
         "controller": "BeTechnicienController"
+    },
+    {
+        "path": "/verify",
+        "methods": ["GET"],
+        "controller": "VerifyController"
     }
 ]

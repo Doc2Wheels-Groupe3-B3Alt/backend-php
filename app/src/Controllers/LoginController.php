@@ -32,6 +32,11 @@ class LoginController extends AbstractController
 
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
+            if (!$user['is_verified']) {
+                $message = "Veuillez vérifier votre email avant de vous connecter";
+                $messageColor = "c-red";
+                return $this->render('login', get_defined_vars());
+            }
             if ($user && password_verify($password, $user['password'])) {
                 $message = "Connexion réussie";
                 $messageColor = "c-green";
