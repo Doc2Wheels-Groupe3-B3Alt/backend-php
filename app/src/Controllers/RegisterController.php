@@ -42,7 +42,7 @@ class RegisterController extends AbstractController
             $mail->CharSet = 'UTF-8';
 
             // Contenu du mail
-            $verificationLink = "https://votresite.com/verify?token=$token";
+            $verificationLink = "http://localhost:8081/verify?token=$token";
 
             $mail->Subject = 'Activez votre compte';
             $mail->Body = "

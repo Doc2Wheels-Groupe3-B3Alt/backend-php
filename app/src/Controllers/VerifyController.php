@@ -28,7 +28,7 @@ class VerifyController extends AbstractController
                 AND verification_expires > NOW()
             ");
 
-            $stmt->execute([':token' => $token]);
+            $stmt->execute(['token' => $token]);
 
             if ($stmt->rowCount() === 0) {
                 throw new \Exception("Token invalide ou expiré");

@@ -31,8 +31,11 @@ class Request
         return $params;
     }
 
-    public function getQueryParams(): array
+    public function getQueryParams($key = null): array|string|null
     {
+        if ($key) {
+            return $this->queryParams[$key] ?? null;
+        }
         return $this->queryParams;
     }
 
