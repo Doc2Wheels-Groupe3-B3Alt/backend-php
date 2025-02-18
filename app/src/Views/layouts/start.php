@@ -15,7 +15,7 @@
         <div class="navbar-menu">
             <a href="/homepage">Accueil</a>
             <a href="#">Présentation</a>
-            <a href="#">Demandes</a>
+            <a href="/createDemand">Demandes</a>
             <a href="#">Contact</a>
         </div>
         <div class="navbar-profile">

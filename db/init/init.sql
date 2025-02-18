@@ -58,8 +58,16 @@ CREATE TABLE IF NOT EXISTS Demandes (
     intervenant_id INT,
     modele_id INT,
     localisation_id INT,
+    services_id INT,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES Utilisateurs(id) ON DELETE SET NULL,
     CONSTRAINT fk_intervenant FOREIGN KEY (intervenant_id) REFERENCES Intervenants(id) ON DELETE SET NULL,
     CONSTRAINT fk_modele FOREIGN KEY (modele_id) REFERENCES Modeles(id) ON DELETE SET NULL,
     CONSTRAINT fk_localisation FOREIGN KEY (localisation_id) REFERENCES Localisations(id) ON DELETE SET NULL
+    CONSTRAINT fk_services FOREIGN KEY (services_id) REFERENCES Services(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS Services (
+    id SERIAL PRIMARY KEY,
+    nom VARCHAR(255) NOT NULL,
+    description TEXT,
 );
