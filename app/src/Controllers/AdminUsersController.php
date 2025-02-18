@@ -33,6 +33,7 @@ class AdminUsersController extends AbstractController
                 role,
                 TO_CHAR(date_creation, 'DD/MM/YYYY HH24:MI') as date_creation
             FROM Utilisateurs
+            WHERE role = 'user'
             ORDER BY date_creation DESC
         ")->fetchAll(\PDO::FETCH_ASSOC);
 

@@ -19,8 +19,12 @@
         <label for="password">Mot de passe :</label>
         <input type="password" name="password" id="password" <?= isset($user) ? '' : 'required' ?>>
 
-        <label for="admin">Administrateur :</label>
-        <input type="checkbox" name="admin" id="admin" <?= isset($user) && $user['role'] === 'admin' ? 'checked' : '' ?>>
+        <label for="role">Rôle :</label>
+        <select name="role" id="role" required>
+            <option value="user" <?= isset($user) && $user['role'] === 'user' ? 'selected' : '' ?>>Utilisateur</option>
+            <option value="admin" <?= isset($user) && $user['role'] === 'admin' ? 'selected' : '' ?>>Administrateur</option>
+            <option value="technicien" <?= isset($user) && $user['role'] === 'technicien' ? 'selected' : '' ?>>Technicien</option>
+        </select>
 
         <button type="submit" class="button"><?= isset($user) ? 'Modifier' : 'Créer' ?></button>
 

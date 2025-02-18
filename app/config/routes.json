@@ -65,8 +65,15 @@
         "controller": "BeTechnicienController"
     },
     {
+
         "path": "/createDemand",
         "methods": ["GET"],
         "controller": "CreateDemandController"
+    },
+    {
+        "path": "/verify",
+        "methods": ["GET"],
+        "controller": "VerifyController"
+
     }
 ]

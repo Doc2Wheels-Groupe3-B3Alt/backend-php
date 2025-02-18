@@ -46,6 +46,9 @@ CREATE TABLE IF NOT EXISTS Utilisateurs (
     date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     adresse_id INT,
     intervenant_id INT,
+    is_verified BOOLEAN NOT NULL DEFAULT FALSE,
+    verification_token VARCHAR(255),
+    verification_expires TIMESTAMP,
     CONSTRAINT fk_adresse FOREIGN KEY (adresse_id) REFERENCES Adresses(id) ON DELETE SET NULL,
     CONSTRAINT fk_intervenant FOREIGN KEY (intervenant_id) REFERENCES Intervenants(id) ON DELETE SET NULL
 );
@@ -71,3 +74,19 @@ CREATE TABLE IF NOT EXISTS Services (
     nom VARCHAR(255) NOT NULL,
     description TEXT,
 );
+
+
+-- Exemple de données
+-- Format des heures : 'HH:MM:SS' ou 'HH:MM'
+INSERT INTO HorairesTravail (heure_debut, heure_fin)
+VALUES 
+  ('08:00:00', '17:00:00'),  -- Horaire classique 8h-17h
+  ('09:30:00', '18:30:00'),  -- Horaire décalé
+  ('13:00:00', '20:00:00');  -- Horaire après-midi
+
+-- Administrateur
+-- remplacer 'username' par le nom d'utilisateur souhaité
+-- UPDATE Utilisateurs 
+-- SET role = 'admin' 
+-- WHERE username = 'username';
+

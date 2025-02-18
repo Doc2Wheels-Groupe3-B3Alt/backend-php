@@ -43,7 +43,7 @@ class AdminUserEditController extends AbstractController
             $username = trim($_POST['username']);
             $email = trim($_POST['email']);
             $password = !empty($_POST['password']) ? password_hash($_POST['password'], PASSWORD_BCRYPT) : null;
-            $role = isset($_POST['role']) ? 'admin' : 'user';
+            $role = $_POST['role'];
 
             if ($id) {
                 if ($password) {

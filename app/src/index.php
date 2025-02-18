@@ -12,8 +12,4 @@ $response = $router->route($request);
 
 http_response_code($response->getStatus());
 
-foreach ($response->getHeaders() as $headerKey => $headerValue) {
-    header($headerKey . ': ' . $headerValue);
-}
-
 echo $response->getContent();
