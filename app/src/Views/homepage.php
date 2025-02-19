@@ -8,17 +8,26 @@
     </div>
 </section>
 <section class="flex align-items-center justify-content-center homepage-section position-relative bg-light-grey">
-    <p class="description-text">Description</p>
+    <p class="description-text homepage-title">Description</p>
     <img class="description-placeholder" src="/src/Images/Placeholder2.png" alt="Description">
 </section>
 <section>
-    <h1>Nos services</h1>
-    <div class="homepage-service bg-light-grey">
-    <?php foreach ($services as $service): ?>
-        <div class="homepage-service bg-light-grey">
-            <h2><?= htmlspecialchars($service['nom']) ?></h2>
-            <p><?= htmlspecialchars($service['description']) ?></p>
-        </div>
-    <?php endforeach; ?>
+    <h1 class="homepage-title">Nos services</h1>
+    <div class="homepage-services">
+        <?php foreach ($services as $service): ?>
+            <div class="homepage-service bg-light-grey">
+                <h2><?= htmlspecialchars($service['nom']) ?></h2>
+                <p><?= htmlspecialchars($service['description']) ?></p>
+            </div>
+        <?php endforeach; ?>
     </div>
+</section>
+<section class="flex flex-column justify-content-center align-items-center m-8 gap-8">
+    <h1 class="homepage-title">Zone d'intervention</h1>
+    <img src="/src/Images/Placeholder2.png" alt="Placeholder">
+    <img class="map" src="/src/Images/map.png" alt="Carte">
+</section>
+<section class="flex align-items-center justify-content-center homepage-section position-relative bg-light-grey">
+    <p class="description-text homepage-title">A propos</p>
+    <img class="description-placeholder" src="/src/Images/Placeholder2.png" alt="Description">
 </section>
