@@ -27,7 +27,7 @@
     <img src="/src/Images/Placeholder2.png" alt="Placeholder">
     <img class="map" src="/src/Images/map.png" alt="Carte">
 </section>
-<section class="flex align-items-center justify-content-center homepage-section position-relative bg-light-grey">
+<section class="flex align-items-center justify-content-center homepage-section position-relative bg-light-grey mb-8">
     <p class="description-text homepage-title">A propos</p>
     <img class="description-placeholder" src="/src/Images/Placeholder2.png" alt="Description">
 </section>
