@@ -1,5 +1,5 @@
 <section class="p-8">
-    <h1 class="text-center">Dashboard administrateur</h1>
+    <h1 class="text-center m-8">Dashboard administrateur</h1>
 
     <div>
         <form action="" method="GET">
@@ -42,12 +42,12 @@
     </div>
 
     <div>
-        <h2>Évolution des demandes</h2>
+        <h2 class="text-center m-8">Évolution des demandes</h2>
         <canvas id="demandesChart"></canvas>
     </div>
 
     <div class>
-        <h2>Services les plus demandés</h2>
+        <h2 class="text-center m-8">Services les plus demandés</h2>
         <table class="table">
             <thead>
                 <tr>
@@ -69,7 +69,7 @@
     </div>
 
     <div>
-        <h2>Performance des techniciens</h2>
+        <h2 class="text-center m-8">Performance des techniciens</h2>
         <table class="table">
             <thead>
                 <tr>
