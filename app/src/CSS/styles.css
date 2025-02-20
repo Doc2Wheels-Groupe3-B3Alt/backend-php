@@ -815,6 +815,10 @@ body {
     }
 }
 
+.page {
+    min-height: 100vh;
+}
+
 @layer components {
     .grid {
         display: grid;
@@ -1321,7 +1325,6 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 100vh;
     }
     .table {
         width: 100%;
