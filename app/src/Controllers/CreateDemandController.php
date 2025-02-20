@@ -12,6 +12,10 @@ class CreateDemandController extends AbstractController
     public function process(Request $request): Response
     {
         $this->startSessionIfNeeded();
+
+        if (!isset($_SESSION['user'])) {
+            return $this->redirect('/login');
+        }
         return $this->homepage();
     }
 
@@ -39,8 +43,8 @@ class CreateDemandController extends AbstractController
             $dateTime = DateTime::createFromFormat('Y-m-d H:i', $date . ' ' . $heure);
             $date_debut = $dateTime ? $dateTime->format('Y-m-d H:i:s') : '';
 
-            $adresse = $_POST['username'] ?? '';
-            $ville = $_POST['password'] ?? '';
+            $adresse = $_POST['adresse'] ?? '';
+            $ville = $_POST['ville'] ?? '';
             $code_postal = $_POST['code_postal'] ?? '';
             $user_id = $_SESSION['user']['id'] ?? 0;
 
@@ -61,8 +65,8 @@ class CreateDemandController extends AbstractController
                 VALUES (:adresse, :ville, :codePostal)
             ");
             $stmt->execute([
-                ':adresse' => htmlspecialchars($adresse),
-                ':ville' => htmlspecialchars($ville),
+                ':adresse' => $adresse,
+                ':ville' => $ville,
                 ':codePostal' => htmlspecialchars($code_postal)
             ]);
             $localisationId = $db->lastInsertId();
@@ -80,7 +84,7 @@ class CreateDemandController extends AbstractController
                 ':services_id' => htmlspecialchars($id_service ?? '')
             
             ]);
-            return $this->redirect('/profil');
+            return $this->redirect('/profil/demandes');
         }
 
         return $this->render('createDemand', get_defined_vars());

@@ -85,6 +85,11 @@
         "controller": "BeTechnicienController"
     },
     {
+        "path": "/profil/demandes",
+        "methods": ["GET"],
+        "controller": "ProfilDemandController"
+    },
+    {
         "path": "/createDemand",
         "methods": ["GET", "POST"],
         "controller": "CreateDemandController"
