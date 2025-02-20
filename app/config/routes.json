@@ -75,6 +75,11 @@
         "controller": "AdminDashboardController"
     },
     {
+        "path": "/admin/feedback",
+        "methods": ["GET", "POST"],
+        "controller": "AdminFeedbackController"
+    },
+    {
         "path": "/profil",
         "methods": ["GET"],
         "controller": "ProfilController"
