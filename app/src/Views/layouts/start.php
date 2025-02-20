@@ -27,6 +27,9 @@
                     <?php if ($_SESSION['user']['role'] === 'admin') : ?>
                         <a href="/admin">Admin</a>
                     <?php endif; ?>
+                    <?php if ($_SESSION['user']['role'] === 'technicien') : ?>
+                        <a href="/technicien">Technicien</a>
+                    <?php endif; ?>
                     <a href="/profil">Profil</a>
                     <a href="/profil/demandes">Mes demandes</a>
                     <form action="/logout" method="POST">

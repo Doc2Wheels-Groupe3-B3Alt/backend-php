@@ -65,6 +65,11 @@
         "controller": "AdminServiceEditController"
     },
     {
+        "path": "/admin/repairs",
+        "methods": ["GET"],
+        "controller": "AdminRepairController"
+    },
+    {
         "path": "/profil",
         "methods": ["GET"],
         "controller": "ProfilController"
@@ -83,6 +88,31 @@
         "path": "/profil/demandes",
         "methods": ["GET"],
         "controller": "ProfilDemandController"
+    },
+    {
+        "path": "/admin/repair/take",
+        "methods": ["GET", "POST"],
+        "controller": "AdminRepairTakeController"
+    },
+    {
+        "path": "/admin/repairs/history",
+        "methods": ["GET"],
+        "controller": "AdminRepairHistoryController"
+    },
+    {
+        "path": "/admin/repair/history/view",
+        "methods": ["GET"],
+        "controller": "AdminRepairHistoryViewController"
+    },
+    {
+        "path": "/technicien",
+        "methods": ["GET"],
+        "controller": "TechnicienController"
+    },
+    {
+        "path": "/technicien/edit",
+        "methods": ["GET", "POST"],
+        "controller": "TechnicienEditController"
     },
     {
         "path": "/createDemand",
