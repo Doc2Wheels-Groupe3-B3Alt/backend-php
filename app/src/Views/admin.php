@@ -11,5 +11,6 @@
     <div class="connexion-bloc mt-8">
         <h2>Dashboard</h2>
         <a href="/admin/dashboard" class="button">Dashboard</a>
+        <a href="/admin/feedback" class="button">Avis et Reclamations</a>
     </div>
 </section>
