@@ -34,7 +34,15 @@ class ProfilDemandController extends AbstractController
         
         $demandes = $stmt->fetchAll(\PDO::FETCH_ASSOC);
     
-        
+        $stmt = $db->prepare("
+            SELECT demande_id
+            FROM Reclamations
+            WHERE user_id = :user_id
+        ");
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->execute();
+
+        $reclamations = $stmt->fetchAll(\PDO::FETCH_COLUMN);
 
         return $this->render('profilDemand', get_defined_vars());
     }

@@ -6,7 +6,7 @@
                 <p><strong>Statut :</strong> <?= htmlspecialchars($demande['statut']) ?></p>
                 <p><strong>Date :</strong> <?= date('d/m/Y', strtotime($demande['date_debut'])) ?> à <?= date('H:i', strtotime($demande['date_debut'])) ?></p>
                 <p><strong>Véhicule :</strong> <?= htmlspecialchars($demande['marque']) ?> <?= htmlspecialchars($demande['modele']) ?> (<?= htmlspecialchars($demande['type']) ?>)</p>
-                <p><strong>Localisation :</strong> 
+                <p><strong>Localisation :</strong>
                     <?php if (!empty($demande['localisation_adresse'])): ?>
                         <br>
                         <?= htmlspecialchars($demande['localisation_adresse']) ?>,<br>
@@ -15,6 +15,7 @@
                         <em>Adresse non renseignée</em>
                     <?php endif; ?>
                 </p>
+                <a href="/profil/demande/avis?demande_id=<?= $demande['id'] ?>" class="button">Avis ou Reclamation</a>
             </div>
         <?php endforeach; ?>
     <?php else: ?>
