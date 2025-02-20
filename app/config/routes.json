@@ -86,7 +86,7 @@
     },
     {
         "path": "/createDemand",
-        "methods": ["GET"],
+        "methods": ["GET", "POST"],
         "controller": "CreateDemandController"
     },
     {
