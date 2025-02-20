@@ -28,6 +28,7 @@
                         <a href="/admin">Admin</a>
                     <?php endif; ?>
                     <a href="/profil">Profil</a>
+                    <a href="/profil/demandes">Mes demandes</a>
                     <form action="/logout" method="POST">
                         <button type="submit">Déconnexion</button>
                     </form>
