@@ -70,6 +70,11 @@
         "controller": "AdminRepairController"
     },
     {
+        "path": "/admin/dashboard",
+        "methods": ["GET"],
+        "controller": "AdminDashboardController"
+    },
+    {
         "path": "/profil",
         "methods": ["GET"],
         "controller": "ProfilController"
