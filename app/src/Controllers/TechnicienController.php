@@ -6,7 +6,7 @@ use App\Http\Request;
 use App\Http\Response;
 use App\Commands\ConnectDatabase;
 
-class ProfilDemandController extends AbstractController
+class TechnicienController extends AbstractController
 {
     public function process(Request $request): Response
     {
@@ -15,9 +15,23 @@ class ProfilDemandController extends AbstractController
         $this->startSessionIfNeeded();
         $db = (new ConnectDatabase())->execute();
 
-        if (!isset($_SESSION['user'])) {
+        if (!isset($_SESSION['user'] )) {
             return $this->redirect('/login');
         }
+
+        if (!isset($_SESSION['user']['role']) || $_SESSION['user']['role'] !== 'technicien') {
+            return $this->redirect('/homepage');
+        }
+
+        $stmt = $db->prepare("SELECT intervenant_id FROM Utilisateurs WHERE id = :user_id");
+        $stmt->execute([':user_id' => $_SESSION['user']['id']]);
+        $intervenant = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$intervenant) {
+            return $this->redirect('/error');
+        }
+
+        $_SESSION['user']['intervenant_id'] = $intervenant['intervenant_id'];
 
         $stmt = $db->prepare("
             SELECT d.*, 
@@ -28,14 +42,15 @@ class ProfilDemandController extends AbstractController
             LEFT JOIN Modeles m ON d.modele_id = m.id
             LEFT JOIN Localisations l ON d.localisation_id = l.id
             LEFT JOIN Services s ON d.services_id = s.id
-            WHERE d.user_id = :id
+            WHERE d.intervenant_id = :id
+            AND d.statut = 'En cours'
         ");
-        $stmt->execute([':id' => $_SESSION['user']['id']]);
+        $stmt->execute([':id' => $_SESSION['user']['intervenant_id']]);
         
         $demandes = $stmt->fetchAll(\PDO::FETCH_ASSOC);
     
         
 
-        return $this->render('profilDemand', get_defined_vars());
+        return $this->render('technicien', get_defined_vars());
     }
 }
