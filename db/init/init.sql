@@ -1,3 +1,12 @@
+DROP TABLE IF EXISTS Demandes;
+DROP TABLE IF EXISTS Services;
+DROP TABLE IF EXISTS Utilisateurs;
+DROP TABLE IF EXISTS Adresses;
+DROP TABLE IF EXISTS Intervenants;
+DROP TABLE IF EXISTS HorairesTravail;
+DROP TABLE IF EXISTS Localisations;
+
+
 CREATE TABLE IF NOT EXISTS Modeles (
     id SERIAL PRIMARY KEY,
     marque VARCHAR(255) NOT NULL,
@@ -62,7 +71,8 @@ CREATE TABLE IF NOT EXISTS Services (
 CREATE TABLE IF NOT EXISTS Demandes (
     id SERIAL PRIMARY KEY,
     date_debut TIMESTAMP NOT NULL,
-    date_fin TIMESTAMP NOT NULL,
+    statut VARCHAR(50) DEFAULT 'En attente',
+    date_fin TIMESTAMP,
     user_id INT,
     intervenant_id INT,
     modele_id INT,
