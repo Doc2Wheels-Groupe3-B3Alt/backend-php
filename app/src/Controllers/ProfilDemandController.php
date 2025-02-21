@@ -46,7 +46,7 @@ class ProfilDemandController extends AbstractController
 
         $reclamations = $stmt->fetchAll(\PDO::FETCH_COLUMN);
 
-        Stripe::setApiKey('sk_test_51QukgX4GYCGhgx29nYRo3NELcMY5HwpKtTcK1zUNeHDnblFpvxQhQoNA8LVHzpNOFuj9IEx94Gb6XSr8Laq0Uj2z00WDXF51Tx');
+        Stripe::setApiKey($_ENV['STRIPE_API_KEY']);
 
         if ($request->getMethod() === 'POST') {
             $session = Session::create([

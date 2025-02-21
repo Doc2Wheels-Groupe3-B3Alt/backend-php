@@ -30,13 +30,13 @@ class RegisterController extends AbstractController
             $mail->isSMTP();
             $mail->Host = 'mail.privateemail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'mailbox@ilianigoudjil.me';
-            $mail->Password = 'Ilian10!#?';
+            $mail->Username = $_ENV['MAIL_USERNAME'];
+            $mail->Password = $_ENV['MAIL_PASSWORD'];
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Encryption TLS
             $mail->Port = 587;
 
             // Configuration email
-            $mail->setFrom('mailbox@ilianigoudjil.me', 'DOC 2 WHEELS');
+            $mail->setFrom($_ENV['MAIL_USERNAME'], 'DOC 2 WHEELS');
             $mail->addAddress($email);
             $mail->isHTML(true);
             $mail->CharSet = 'UTF-8';
