@@ -96,7 +96,7 @@
     },
     {
         "path": "/profil/demandes",
-        "methods": ["GET"],
+        "methods": ["GET", "POST"],
         "controller": "ProfilDemandController"
     },
     {
@@ -138,5 +138,10 @@
         "path": "/verify",
         "methods": ["GET"],
         "controller": "VerifyController"
+    },
+    {
+        "path": "/checkout",
+        "methods": ["GET", "POST"],
+        "controller": "PaymentController"
     }
 ]
