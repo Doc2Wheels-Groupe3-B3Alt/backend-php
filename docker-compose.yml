@@ -9,6 +9,7 @@ services:
             - 8081:80
         depends_on:
             - db
+
     db:
         container_name: projetPEC-db
         image: postgres:latest
@@ -21,5 +22,15 @@ services:
             - 5444:5432
         volumes:
             - ./db/init:/docker-entrypoint-initdb.d
+
+    adminer:
+        container_name: projetPEC-adminer
+        image: adminer
+        restart: always
+        ports:
+            - 8082:8080
+        depends_on:
+            - db
+
 volumes:
     db:

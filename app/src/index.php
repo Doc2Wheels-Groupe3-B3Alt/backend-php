@@ -10,4 +10,6 @@ $request = new Request();
 $router = new Router();
 $response = $router->route($request);
 
+http_response_code($response->getStatus());
+
 echo $response->getContent();
