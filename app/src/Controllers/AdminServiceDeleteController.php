@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Entities\Services;
 use App\Http\Request;
 use App\Http\Response;
 use App\Commands\ConnectDatabase;
@@ -26,18 +27,11 @@ class AdminServiceDeleteController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
             $id = (int) $_POST['id'];
 
-            $db = (new ConnectDatabase())->execute();
-
-            // Vérifie si l'utilisateur existe avant de le supprimer
-            $stmt = $db->prepare("SELECT * FROM Services WHERE id = :id");
-            $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
-            $stmt->execute();
-            $service = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $tmp = new Services();
+            $service = $tmp->getServiceById($id);
 
             if ($service) {
-                $stmt = $db->prepare("DELETE FROM Services WHERE id = :id");
-                $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
-                $stmt->execute();
+                $tmp->deleteService($id);
             }
         }
 
