@@ -1,27 +1,142 @@
 [
-  {
-    "path": "/test",
-    "methods": ["GET"],
-    "controller": "TestController"
-  },
-  {
-    "path": "/login",
-    "methods": ["GET", "POST"],
-    "controller": "LoginController"
-  },
-  {
-    "path": "/register",
-    "methods": ["GET", "POST"],
-    "controller": "RegisterController"
-  },
-  {
-    "path": "/homepage",
-    "methods": ["GET"],
-    "controller": "HomepageController"
-  },
-  {
-    "path": "/admin",
-    "methods": ["GET"],
-    "controller": "AdminController"
-  }
+    {
+        "path": "/test",
+        "methods": ["GET"],
+        "controller": "TestController"
+    },
+    {
+        "path": "/login",
+        "methods": ["GET", "POST"],
+        "controller": "LoginController"
+    },
+    {
+        "path": "/register",
+        "methods": ["GET", "POST"],
+        "controller": "RegisterController"
+    },
+    {
+        "path": "/logout",
+        "methods": ["POST"],
+        "controller": "LogoutController"
+    },
+    {
+        "path": "/homepage",
+        "methods": ["GET"],
+        "controller": "HomepageController"
+    },
+    {
+        "path": "/admin",
+        "methods": ["GET"],
+        "controller": "AdminController"
+    },
+    {
+        "path": "/admin/utilisateurs",
+        "methods": ["GET"],
+        "controller": "AdminUsersController"
+    },
+    {
+        "path": "/admin/utilisateurs/delete",
+        "methods": ["POST"],
+        "controller": "AdminUserDeleteController"
+    },
+    {
+        "path": "/admin/utilisateurs/edit",
+        "methods": ["GET", "POST"],
+        "controller": "AdminUserEditController"
+    },
+    {
+        "path": "/admin/techniciens",
+        "methods": ["GET"],
+        "controller": "AdminTechniciensController"
+    },
+    {
+        "path": "/admin/services",
+        "methods": ["GET"],
+        "controller": "AdminServicesController"
+    },
+    {
+        "path": "/admin/services/delete",
+        "methods": ["POST"],
+        "controller": "AdminServiceDeleteController"
+    },
+    {
+        "path": "/admin/services/edit",
+        "methods": ["GET", "POST"],
+        "controller": "AdminServiceEditController"
+    },
+    {
+        "path": "/admin/repairs",
+        "methods": ["GET"],
+        "controller": "AdminRepairController"
+    },
+    {
+        "path": "/admin/dashboard",
+        "methods": ["GET"],
+        "controller": "AdminDashboardController"
+    },
+    {
+        "path": "/admin/feedback",
+        "methods": ["GET", "POST"],
+        "controller": "AdminFeedbackController"
+    },
+    {
+        "path": "/profil",
+        "methods": ["GET"],
+        "controller": "ProfilController"
+    },
+    {
+        "path": "/profil/edit",
+        "methods": ["GET", "POST"],
+        "controller": "ProfilEditController"
+    },
+    {
+        "path": "/profil/technicien",
+        "methods": ["GET", "POST"],
+        "controller": "BeTechnicienController"
+    },
+    {
+        "path": "/profil/demandes",
+        "methods": ["GET", "POST"],
+        "controller": "ProfilDemandController"
+    },
+    {
+        "path": "/profil/demande/avis",
+        "methods": ["GET", "POST"],
+        "controller": "ProfilDemandAvisController"
+    },
+    {
+        "path": "/admin/repair/take",
+        "methods": ["GET", "POST"],
+        "controller": "AdminRepairTakeController"
+    },
+    {
+        "path": "/admin/repairs/history",
+        "methods": ["GET"],
+        "controller": "AdminRepairHistoryController"
+    },
+    {
+        "path": "/admin/repair/history/view",
+        "methods": ["GET"],
+        "controller": "AdminRepairHistoryViewController"
+    },
+    {
+        "path": "/technicien",
+        "methods": ["GET"],
+        "controller": "TechnicienController"
+    },
+    {
+        "path": "/technicien/edit",
+        "methods": ["GET", "POST"],
+        "controller": "TechnicienEditController"
+    },
+    {
+        "path": "/createDemand",
+        "methods": ["GET", "POST"],
+        "controller": "CreateDemandController"
+    },
+    {
+        "path": "/verify",
+        "methods": ["GET"],
+        "controller": "VerifyController"
+    }
 ]

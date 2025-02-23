@@ -10,6 +10,12 @@ class LoginController extends AbstractController
 {
     public function process(Request $request): Response
     {
+        $this->startSessionIfNeeded();
+
+        if ($this->isLoggedIn()) {
+            return $this->redirect('/homepage');
+        }
+
         return $this->login();
     }
 
@@ -20,17 +26,29 @@ class LoginController extends AbstractController
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $stmt = $db->prepare("SELECT * FROM Utilisateurs WHERE username = :username");
+            $stmt = $db->prepare("SELECT * FROM Utilisateurs WHERE username = :username OR email = :username");
             $stmt->bindParam(':username', $username);
             $stmt->execute();
 
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            $email = $db->query("SELECT email FROM Utilisateurs WHERE email='$username'")->fetchColumn();
-
-            if ($email || $user && password_verify($password, $user['password'])) {
+            if (!$user['is_verified']) {
+                $message = "Veuillez vérifier votre email avant de vous connecter";
+                $messageColor = "c-red";
+                return $this->render('login', get_defined_vars());
+            }
+            if ($user && password_verify($password, $user['password'])) {
                 $message = "Connexion réussie";
                 $messageColor = "c-green";
+
+                session_regenerate_id(true);
+                $_SESSION['user'] = [
+                    'id' => $user['id'],
+                    'username' => $user['username'],
+                    'role' => $user['role'],
+                    
+                ];
+                return $this->redirect('/homepage');
             } else {
                 $message = "Identifiant ou mot de passe incorrect";
                 $messageColor = "c-red";

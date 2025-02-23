@@ -9,6 +9,28 @@ abstract class AbstractController
 {
     abstract public function process(Request $request): Response;
 
+    protected function startSessionIfNeeded(): void
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start([
+                'cookie_lifetime' => 86400, // 1 jour
+                'read_and_close'  => false
+            ]);
+        }
+    }
+
+    protected function redirect(string $url): Response
+    {
+        header('Location: ' . $url);
+        exit();
+        return new Response('', 302, ['Location' => $url]);
+    }
+
+    protected function isLoggedIn(): bool
+    {
+        return isset($_SESSION['user']);
+    }
+
     protected function render(string $template, array $data = []): Response
     {
         $response = new Response();
