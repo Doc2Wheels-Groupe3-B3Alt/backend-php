@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Http\Request;
 use App\Http\Response;
 use App\Commands\ConnectDatabase;
+use App\Entities\Services;
 
 class AdminServiceEditController extends AbstractController
 {
@@ -21,15 +22,13 @@ class AdminServiceEditController extends AbstractController
             return $this->redirect('/homepage');
         }
 
-        $db = (new ConnectDatabase())->execute();
+        
         $service = null;
 
         if (isset($_GET['id'])) {
             $id = (int)$_GET['id'];
-            $stmt = $db->prepare("SELECT * FROM Services WHERE id = :id");
-            $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
-            $stmt->execute();
-            $service = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $tmp = new Services();
+            $service = $tmp->getServiceById($id);
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -39,16 +38,14 @@ class AdminServiceEditController extends AbstractController
             $description = trim($_POST['description']);
 
             if ($id) {
-                $stmt = $db->prepare("UPDATE Services SET nom = :nom, description = :description WHERE id = :id");
-                $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+                $tmp = new Services();
+                $service = $tmp->updateService($id, $nom, $description);
             } else {
-                $stmt = $db->prepare("INSERT INTO Services (nom, description) VALUES (:nom, :description)");
+                $tmp = new Services();
+                $service = $tmp->insertService($id, $nom, $description);
             }
 
-            $stmt->bindParam(':nom', $nom);
-            $stmt->bindParam(':description', $description);
-            $stmt->execute();
-
+        
             return $this->redirect('/admin/services');
         }
 

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Http\Request;
 use App\Http\Response;
 use App\Commands\ConnectDatabase;
+use App\Entities\Services;
 
 class AdminServicesController extends AbstractController
 {
@@ -16,21 +17,14 @@ class AdminServicesController extends AbstractController
 
     private function adminServices()
     {
-        $db = (new ConnectDatabase())->execute();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
-            $stmt = $db->prepare("DELETE FROM Services WHERE id = :id");
-            $stmt->execute([':id' => $_POST['delete_id']]);
+            $tmp = new Services();
+            $tmp->deleteService($_POST['delete_id']);
         }
 
-        $services = $db->query("
-            SELECT 
-                id,
-                nom,
-                description
-            FROM Services
-            ORDER BY id DESC
-        ")->fetchAll(\PDO::FETCH_ASSOC);
+        $tmp = new Services();
+        $services = $tmp->getServices();
 
         if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
             return $this->redirect('/homepage');

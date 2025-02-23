@@ -815,10 +815,6 @@ body {
     }
 }
 
-.page {
-    min-height: 100vh;
-}
-
 @layer components {
     .grid {
         display: grid;
@@ -1325,6 +1321,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: 100vh;
     }
     .table {
         width: 100%;
@@ -1493,85 +1490,6 @@ body {
 
 .map {
     width: 65%;
-}
-
-.reclamations-dashboard h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-.reclamations-dashboard .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-}
-.reclamations-dashboard .stats-grid .stat-card {
-    background-color: #ffffff;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border: #000;
-    border-style: solid;
-}
-.reclamations-dashboard .stats-grid .stat-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-}
-.reclamations-dashboard .stats-grid .stat-card .stat-value {
-    font-size: 2rem;
-    font-weight: bold;
-}
-.reclamations-dashboard .stats-grid .stat-card .stat-detail {
-    font-size: 1rem;
-    color: #6c757d;
-}
-
-.filters {
-    margin-bottom: 1rem;
-}
-.filters form {
-    display: flex;
-    gap: 1rem;
-}
-.filters form select {
-    padding: 0.5rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 0.25rem;
-}
-
-.reclamations-list .reclamation-card {
-    background-color: #ffffff;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border: var(--black);
-    border-style: solid;
-    margin-bottom: 1rem;
-}
-.reclamations-list .reclamation-card .reclamation-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-.reclamations-list .reclamation-card .reclamation-header h3 {
-    font-size: 1.5rem;
-}
-.reclamations-list .reclamation-card .reclamation-header .status.en_attente {
-    color: #ffc107;
-}
-.reclamations-list .reclamation-card .reclamation-header .status.en_cours {
-    color: #17a2b8;
-}
-.reclamations-list .reclamation-card .reclamation-header .status.resolue {
-    color: #28a745;
-}
-.reclamations-list .reclamation-card .reclamation-header .status.rejetee {
-    color: #dc3545;
-}
-.reclamations-list .reclamation-card .reclamation-content .rating {
-    display: flex;
-    gap: 0.25rem;
-}
-.reclamations-list .reclamation-card .reclamation-content .rating .star {
-    color: #ffc107;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Entities\User;
 use App\Http\Request;
 use App\Http\Response;
 use App\Commands\ConnectDatabase;
@@ -23,19 +24,8 @@ class AdminUsersController extends AbstractController
             $stmt->execute([':id' => $_POST['delete_id']]);
         }
 
-        $users = $db->query("
-            SELECT 
-                id,
-                username,
-                email,
-                nom,
-                prenom,
-                role,
-                TO_CHAR(date_creation, 'DD/MM/YYYY HH24:MI') as date_creation
-            FROM Utilisateurs
-            WHERE role = 'user'
-            ORDER BY date_creation DESC
-        ")->fetchAll(\PDO::FETCH_ASSOC);
+        $tmp = new User();
+        $users = $tmp->getUsers();
 
         if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
             return $this->redirect('/homepage');

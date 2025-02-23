@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Http\Request;
 use App\Http\Response;
 use App\Commands\ConnectDatabase;
+use App\Entities\User;
 
 class AdminUserEditController extends AbstractController
 {
@@ -23,15 +24,13 @@ class AdminUserEditController extends AbstractController
     {
         $this->startSessionIfNeeded();
 
-        $db = (new ConnectDatabase())->execute();
+        
         $user = null;
 
         if (isset($_GET['id'])) {
             $id = (int)$_GET['id'];
-            $stmt = $db->prepare("SELECT * FROM Utilisateurs WHERE id = :id");
-            $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
-            $stmt->execute();
-            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $tmp = new User();
+            $user = $tmp->getUserById($id);
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -46,24 +45,19 @@ class AdminUserEditController extends AbstractController
 
             if ($id) {
                 if ($password) {
-                    $stmt = $db->prepare("UPDATE Utilisateurs SET prenom = :prenom, nom = :nom, username = :username, email = :email, password = :password, role = :role WHERE id = :id");
-                    $stmt->bindParam(':password', $password);
+                    $tmp = new User();
+                    $user = $tmp->updatePassword($id, $prenom, $nom, $username, $email, $password, $role);
                 } else {
-                    $stmt = $db->prepare("UPDATE Utilisateurs SET prenom = :prenom, nom = :nom, username = :username, email = :email, role = :role WHERE id = :id");
+                    $tmp = new User();
+                    $user = $tmp->updateWithoutPassword($id, $prenom, $nom, $username, $email, $role);
                 }
-                $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+               
             } else {
-                $stmt = $db->prepare("INSERT INTO Utilisateurs (prenom, nom, username, email, password, role) VALUES (:prenom, :nom, :username, :email, :password, :role)");
-                $stmt->bindParam(':password', $password);
+                $tmp = new User();
+                $user = $tmp->insertUser($prenom, $nom, $username, $email, $password, $role);
             }
 
-            $stmt->bindParam(':prenom', $prenom);
-            $stmt->bindParam(':nom', $nom);
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':role', $role);
-            $stmt->execute();
-
+        
             return $this->redirect('/admin/utilisateurs');
         }
 

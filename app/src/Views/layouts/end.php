@@ -1,4 +1,3 @@
-</div>
 <footer class="footer">
     <div class="footer-inner">
         <nav class="menu-footer">
