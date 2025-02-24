@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Commands\ConnectDatabase;
+
 class ReclamationEntity
 {
     private int $id;
@@ -15,31 +17,11 @@ class ReclamationEntity
     private ?string $reponse;
     private ?string $date_reponse;
     private ?int $moderateur_id;
+    private $db;
 
-    public function __construct(
-        int $id,
-        string $type,
-        string $description,
-        string $date_creation,
-        string $statut = 'en_attente',
-        ?int $note = null,
-        ?int $user_id = null,
-        ?int $demande_id = null,
-        ?string $reponse = null,
-        ?string $date_reponse = null,
-        ?int $moderateur_id = null
-    ) {
-        $this->id = $id;
-        $this->type = $type;
-        $this->description = $description;
-        $this->date_creation = $date_creation;
-        $this->statut = $statut;
-        $this->note = $note;
-        $this->user_id = $user_id;
-        $this->demande_id = $demande_id;
-        $this->reponse = $reponse;
-        $this->date_reponse = $date_reponse;
-        $this->moderateur_id = $moderateur_id;
+    public function __construct()
+    {
+        $this->db = (new ConnectDatabase())->execute();
     }
 
     // Getters and setters for each property
@@ -152,5 +134,78 @@ class ReclamationEntity
     public function setModerateurId(?int $moderateur_id): void
     {
         $this->moderateur_id = $moderateur_id;
+    }
+
+    public function getReclamations($type, $statut)
+    {
+        $where = [];
+        $params = [];
+
+        if ($type !== 'all') {
+            $where[] = "r.type = :type";
+            $params[':type'] = $type;
+        }
+
+        if ($statut !== 'all') {
+            $where[] = "r.statut = :statut";
+            $params[':statut'] = $statut;
+        }
+
+        $whereSql = $where ? 'WHERE ' . implode(' AND ', $where) : '';
+
+        $stmt = $this->db->prepare("
+            SELECT * FROM Reclamations r
+            $whereSql
+        ");
+        $stmt->execute($params);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function updateReclamation($action, $reclamationId, $reponse = null)
+    {
+        switch ($action) {
+            case 'repondre':
+                if (!empty($reponse)) {
+                    $stmt = $this->db->prepare("
+                        UPDATE Reclamations 
+                        SET reponse = :reponse,
+                            date_reponse = CURRENT_TIMESTAMP,
+                            statut = 'resolue',
+                            moderateur_id = :moderateur_id
+                        WHERE id = :id
+                    ");
+                    $stmt->execute([
+                        ':reponse' => $reponse,
+                        ':moderateur_id' => $_SESSION['user']['id'],
+                        ':id' => $reclamationId
+                    ]);
+                }
+                break;
+            case 'rejeter':
+                $stmt = $this->db->prepare("
+                    UPDATE Reclamations 
+                    SET statut = 'rejetee',
+                        moderateur_id = :moderateur_id
+                    WHERE id = :id
+                ");
+                $stmt->execute([
+                    ':moderateur_id' => $_SESSION['user']['id'],
+                    ':id' => $reclamationId
+                ]);
+                break;
+            case 'accepter':
+                $stmt = $this->db->prepare("
+                    UPDATE Reclamations 
+                    SET statut = 'acceptee',
+                        moderateur_id = :moderateur_id
+                    WHERE id = :id
+                ");
+                $stmt->execute([
+                    ':moderateur_id' => $_SESSION['user']['id'],
+                    ':id' => $reclamationId
+                ]);
+                break;
+        }
     }
 }
