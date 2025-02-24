@@ -1,7 +1,7 @@
-<section class="page-connexion">
+<section class="page-form">
     <h1>Mon Profil</h1>
 
-    <div class="connexion-bloc mb-8">
+    <div class="form-bloc mb-8">
         <p>Pseudonyme : <?= htmlspecialchars($user['username']) ?></p>
         <p>Nom : <?= htmlspecialchars($user['nom']) ?></p>
         <p>Prénom : <?= htmlspecialchars($user['prenom']) ?></p>

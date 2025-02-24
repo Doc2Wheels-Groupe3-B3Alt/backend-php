@@ -1,7 +1,7 @@
 <section class="table-page">
     <h1><?= isset($service) ? 'Modifier' : 'Créer' ?> un service</h1>
 
-    <form action="/admin/services/edit" method="POST" class="connexion-bloc">
+    <form action="/admin/services/edit" method="POST" class="form-bloc">
         <input type="hidden" name="id" value="<?= isset($service) ? $service['id'] : '' ?>">
 
         <label for="nom">Nom :</label>

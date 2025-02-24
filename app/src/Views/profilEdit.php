@@ -1,7 +1,7 @@
-<section class="page-connexion">
+<section class="page-form">
     <h1>Modifier mes informations</h1>
 
-    <form method="POST" class="connexion-bloc">
+    <form method="POST" class="form-bloc">
         <div>
             <label>Nom :</label>
             <input class="input mt-4" type="text" name="nom" value="<?= htmlspecialchars($user['nom']) ?>">
