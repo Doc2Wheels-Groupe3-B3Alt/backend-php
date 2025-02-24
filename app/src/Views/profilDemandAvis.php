@@ -1,7 +1,7 @@
 <section class="table-page">
     <h1>Donner votre avis sur la demande</h1>
 
-    <form action="/profil/demande/avis" method="POST" class="connexion-bloc">
+    <form action="/profil/demande/avis" method="POST" class="form-bloc">
         <input type="hidden" name="demande_id" value="<?= htmlspecialchars($demandeId) ?>">
 
 

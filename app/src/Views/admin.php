@@ -9,7 +9,7 @@
         <a href="/admin/repairs/history" class="button">Historique de réparations</a>
         <a href="/admin/services" class="button">Services</a>
     </div>
-    <div class="connexion-bloc mt-8">
+    <div class="form-bloc mt-8">
         <h2>Dashboard</h2>
         <a href="/admin/dashboard" class="button">Dashboard</a>
         <a href="/admin/feedback" class="button">Avis et Reclamations</a>

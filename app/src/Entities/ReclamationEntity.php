@@ -1,156 +1,158 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entities;
+
+use App\Commands\ConnectDatabase;
 
 class ReclamationEntity
 {
-    private int $id;
-    private string $type;
-    private string $description;
-    private string $date_creation;
-    private string $statut;
-    private ?int $note;
-    private ?int $user_id;
-    private ?int $demande_id;
-    private ?string $reponse;
-    private ?string $date_reponse;
-    private ?int $moderateur_id;
+    private $db;
 
-    public function __construct(
-        int $id,
-        string $type,
-        string $description,
-        string $date_creation,
-        string $statut = 'en_attente',
-        ?int $note = null,
-        ?int $user_id = null,
-        ?int $demande_id = null,
-        ?string $reponse = null,
-        ?string $date_reponse = null,
-        ?int $moderateur_id = null
-    ) {
-        $this->id = $id;
-        $this->type = $type;
-        $this->description = $description;
-        $this->date_creation = $date_creation;
-        $this->statut = $statut;
-        $this->note = $note;
-        $this->user_id = $user_id;
-        $this->demande_id = $demande_id;
-        $this->reponse = $reponse;
-        $this->date_reponse = $date_reponse;
-        $this->moderateur_id = $moderateur_id;
+    public function __construct()
+    {
+        $this->db = (new ConnectDatabase())->execute();
     }
 
-    // Getters and setters for each property
-
-    public function getId(): int
+    public function getReclamations($type, $statut)
     {
-        return $this->id;
+        $where = [];
+        $params = [];
+
+        if ($type !== 'all') {
+            $where[] = "r.type = :type";
+            $params[':type'] = $type;
+        }
+
+        if ($statut !== 'all') {
+            $where[] = "r.statut = :statut";
+            $params[':statut'] = $statut;
+        }
+
+        $whereSql = $where ? 'WHERE ' . implode(' AND ', $where) : '';
+
+        $stmt = $this->db->prepare("
+            SELECT r.*, u.prenom as user_prenom, u.nom as user_nom
+            FROM Reclamations r
+            JOIN Utilisateurs u ON r.user_id = u.id
+            $whereSql
+        ");
+        $stmt->execute($params);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function getType(): string
+    public function updateReclamation($action, $reclamationId, $reponse = null)
     {
-        return $this->type;
+        switch ($action) {
+            case 'repondre':
+                if (!empty($reponse)) {
+                    $stmt = $this->db->prepare("
+                        UPDATE Reclamations 
+                        SET reponse = :reponse,
+                            date_reponse = CURRENT_TIMESTAMP,
+                            statut = 'resolue',
+                            moderateur_id = :moderateur_id
+                        WHERE id = :id
+                    ");
+                    $stmt->execute([
+                        ':reponse' => $reponse,
+                        ':moderateur_id' => $_SESSION['user']['id'],
+                        ':id' => $reclamationId
+                    ]);
+                }
+                break;
+            case 'rejeter':
+                $stmt = $this->db->prepare("
+                    UPDATE Reclamations 
+                    SET statut = 'rejetee',
+                        moderateur_id = :moderateur_id
+                    WHERE id = :id
+                ");
+                $stmt->execute([
+                    ':moderateur_id' => $_SESSION['user']['id'],
+                    ':id' => $reclamationId
+                ]);
+                break;
+            case 'accepter':
+                $stmt = $this->db->prepare("
+                    UPDATE Reclamations 
+                    SET statut = 'acceptee',
+                        moderateur_id = :moderateur_id
+                    WHERE id = :id
+                ");
+                $stmt->execute([
+                    ':moderateur_id' => $_SESSION['user']['id'],
+                    ':id' => $reclamationId
+                ]);
+                break;
+        }
     }
 
-    public function getDescription(): string
+    public function getStats()
     {
-        return $this->description;
+        $stmt = $this->db->query("
+            SELECT 
+                COUNT(*) as total,
+                COUNT(CASE WHEN type = 'avis' THEN 1 END) as total_avis,
+                COUNT(CASE WHEN type = 'reclamation' THEN 1 END) as total_reclamations,
+                COUNT(CASE WHEN statut = 'en_attente' THEN 1 END) as en_attente,
+                AVG(CASE WHEN type = 'avis' THEN note END) as moyenne_avis
+            FROM Reclamations
+        ");
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function getDateCreation(): string
+    public function getDemandeById($demandeId, $userId)
     {
-        return $this->date_creation;
+        $stmt = $this->db->prepare("
+            SELECT d.* 
+            FROM Demandes d 
+            WHERE d.id = :demande_id 
+            AND d.user_id = :user_id 
+            AND d.date_fin IS NOT NULL
+        ");
+        $stmt->bindParam(':demande_id', $demandeId, \PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $userId, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function getStatut(): string
+    public function getExistingAvis($demandeId, $userId)
     {
-        return $this->statut;
+        $stmt = $this->db->prepare("
+            SELECT * FROM Reclamations 
+            WHERE demande_id = :demande_id 
+            AND user_id = :user_id
+        ");
+        $stmt->bindParam(':demande_id', $demandeId, \PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $userId, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function getNote(): ?int
+    public function insertReclamation($type, $description, $note, $userId, $demandeId)
     {
-        return $this->note;
+        $stmt = $this->db->prepare("
+            INSERT INTO Reclamations (type, description, note, user_id, demande_id, date_creation)
+            VALUES (:type, :description, :note, :user_id, :demande_id, CURRENT_TIMESTAMP)
+        ");
+        $stmt->bindParam(':type', $type);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':note', $note, \PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $userId, \PDO::PARAM_INT);
+        $stmt->bindParam(':demande_id', $demandeId, \PDO::PARAM_INT);
+        $stmt->execute();
     }
 
-    public function getUserId(): ?int
+    public function getReclamationsByUserId($userId)
     {
-        return $this->user_id;
-    }
-
-    public function getDemandeId(): ?int
-    {
-        return $this->demande_id;
-    }
-
-    public function getReponse(): ?string
-    {
-        return $this->reponse;
-    }
-
-    public function getDateReponse(): ?string
-    {
-        return $this->date_reponse;
-    }
-
-    public function getModerateurId(): ?int
-    {
-        return $this->moderateur_id;
-    }
-
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    public function setType(string $type): void
-    {
-        $this->type = $type;
-    }
-
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-
-    public function setDateCreation(string $date_creation): void
-    {
-        $this->date_creation = $date_creation;
-    }
-
-    public function setStatut(string $statut): void
-    {
-        $this->statut = $statut;
-    }
-
-    public function setNote(?int $note): void
-    {
-        $this->note = $note;
-    }
-
-    public function setUserId(?int $user_id): void
-    {
-        $this->user_id = $user_id;
-    }
-
-    public function setDemandeId(?int $demande_id): void
-    {
-        $this->demande_id = $demande_id;
-    }
-
-    public function setReponse(?string $reponse): void
-    {
-        $this->reponse = $reponse;
-    }
-
-    public function setDateReponse(?string $date_reponse): void
-    {
-        $this->date_reponse = $date_reponse;
-    }
-
-    public function setModerateurId(?int $moderateur_id): void
-    {
-        $this->moderateur_id = $moderateur_id;
+        $stmt = $this->db->prepare("
+            SELECT demande_id
+            FROM Reclamations
+            WHERE user_id = :user_id
+        ");
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_COLUMN);
     }
 }

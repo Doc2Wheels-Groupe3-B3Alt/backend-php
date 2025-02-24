@@ -9,21 +9,23 @@ use App\Commands\ConnectDatabase;
 
 class Demande extends AbstractEntity
 {
-   
+
     private $db;
     public int $id;
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = (new ConnectDatabase())->execute();
     }
-    
+
 
     public function getId(): int
     {
         return $this->id;
     }
 
-   
-    public function getHistoryDemandeById(int $id) {
+
+    public function getHistoryDemandeById(int $id)
+    {
         $stmt = $this->db->prepare("
             SELECT d.*, 
                 m.marque, m.modele, m.type, 
@@ -41,11 +43,12 @@ class Demande extends AbstractEntity
             ORDER BY id DESC;
         ");
         $stmt->execute([':id' => $id]);
-        
+
         return $stmt->fetch(\PDO::FETCH_ASSOC);;
     }
 
-    public function getHistoriesDemande() {
+    public function getHistoriesDemande()
+    {
         $demandes = $this->db->query("
             SELECT d.*, 
                 m.marque, m.modele, m.type, 
@@ -65,7 +68,8 @@ class Demande extends AbstractEntity
         return $demandes;
     }
 
-    public function getDemandeWaiting() {
+    public function getDemandeWaiting()
+    {
         $demandes = $this->db->query("
             SELECT d.*, 
                 m.marque, m.modele, m.type, 
@@ -82,8 +86,9 @@ class Demande extends AbstractEntity
         ")->fetchAll(\PDO::FETCH_ASSOC);
         return $demandes;
     }
-    
-    public function getDemandeWaitingById(int $id) {
+
+    public function getDemandeWaitingById(int $id)
+    {
         $stmt = $this->db->prepare("
             SELECT d.*, 
                 m.marque, m.modele, m.type, 
@@ -103,16 +108,34 @@ class Demande extends AbstractEntity
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function updateDemande(int $id, int $intervenant_id) {
+    public function updateDemande(int $id, int $intervenant_id)
+    {
         $stmt = $this->db->prepare("UPDATE Demandes SET statut = 'En cours', intervenant_id = :intervenant_id WHERE id = :id");
         $stmt->execute([':id' => $id, ':intervenant_id' => $intervenant_id]);
         return true;
     }
 
-    public function deleteById(int $id) {
+    public function deleteById(int $id)
+    {
         $stmt = $this->db->prepare("DELETE FROM Demandes WHERE id = :id");
         $stmt->execute([':id' => $_POST['delete_id']]);
         return true;
     }
-    
+
+    public function getDemandesByUserId($userId)
+    {
+        $stmt = $this->db->prepare("
+            SELECT d.*, 
+                m.marque, m.modele, m.type, 
+                l.adresse AS localisation_adresse, l.ville AS localisation_ville, l.codePostal AS localisation_code_postal,
+                s.nom AS service_nom, s.description AS service_description
+            FROM Demandes d
+            LEFT JOIN Modeles m ON d.modele_id = m.id
+            LEFT JOIN Localisations l ON d.localisation_id = l.id
+            LEFT JOIN Services s ON d.services_id = s.id
+            WHERE d.user_id = :id
+        ");
+        $stmt->execute([':id' => $userId]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
