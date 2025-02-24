@@ -1,7 +1,8 @@
-<section class="page-connexion">
+<section class="page-form">
     <h1>Admin</h1>
-    <div class="connexion-bloc">
-        <h2>Gestion des entitées</h2>
+
+    <div class="form-bloc">
+
         <a href="/admin/utilisateurs" class="button">Utilisateurs</a>
         <a href="/admin/techniciens" class="button">Techniciens</a>
         <a href="/admin/repairs" class="button">Demande de réparations</a>

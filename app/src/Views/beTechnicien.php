@@ -1,7 +1,7 @@
-<section class="page-connexion">
+<section class="page-form">
     <h1>Devenir technicien</h1>
 
-    <form method="POST" class="connexion-bloc">
+    <form method="POST" class="form-bloc">
         <h2>Adresse de travail</h2>
         <div class="form-group">
             <label>Adresse :</label>

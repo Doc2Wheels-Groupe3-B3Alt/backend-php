@@ -1,8 +1,8 @@
 <button class="button" onclick="history.back();">Retour</button>
-<section class="page-connexion">
+<section class="page-form">
     <h1>Demande de réparation</h1>
 
-    <div class="connexion-bloc mb-8">
+    <div class="form-bloc mb-8">
         <p>Motif : <?= htmlspecialchars($demande['service_nom']) ?></p>
         <p>ID : <?= htmlspecialchars($demande['id']) ?></p>
         <p>Type : <?= htmlspecialchars($demande['type']) ?></p>
@@ -12,7 +12,7 @@
         <p>Adresse : <?= htmlspecialchars($demande['localisation_adresse']) ?></p>
         <p>Ville : <?= htmlspecialchars($demande['localisation_ville']) ?></p>
         <p>Code Postal : <?= htmlspecialchars($demande['localisation_adresse']) ?></p>
-        
+
     </div>
 
     <div class="actions">

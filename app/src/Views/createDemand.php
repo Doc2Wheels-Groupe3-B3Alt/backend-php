@@ -1,4 +1,4 @@
-<section class="page-connexion">
+<section class="page-form">
 
 
     <form method="POST" action="/createDemand">
@@ -7,7 +7,7 @@
             <div class="col-4">
                 <h4>Véhicule</h4>
                 <div class="mt-4">
-                    <label  for="id_service">Type</label>
+                    <label for="id_service">Type</label>
                     <select class="input" name="typeMoto" id="typeMoto" required>
                         <option value="" selected disabled>--Choisir le type--</option>
                         <option value="scooter">Scooter</option>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <h4>Prestation</h4> 
+                <h4>Prestation</h4>
                 <div class="mt-4">
                     <label for="date">Date</label>
                     <input class="input" type="date" name="date" id="date" required>
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <h4>Localisation</h4> 
+                <h4>Localisation</h4>
                 <div class="mt-4">
                     <label for="adresse">Adresse</label>
                     <input class="input" type="text" name="adresse" id="adresse" required>
@@ -65,7 +65,7 @@
                     <input class="input" type="text" name="code_postal" id="code_postal" required>
                 </div>
             </div>
-            
+
         </div>
-                        </form> 
+    </form>
 </section>

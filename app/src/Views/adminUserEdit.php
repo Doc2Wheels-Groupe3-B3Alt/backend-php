@@ -1,7 +1,7 @@
 <section class="table-page">
     <h1><?= isset($user) ? 'Modifier' : 'Créer' ?> un utilisateur</h1>
 
-    <form action="/admin/utilisateurs/edit" method="POST" class="connexion-bloc">
+    <form action="/admin/utilisateurs/edit" method="POST" class="form-bloc">
         <input type="hidden" name="id" value="<?= isset($user) ? $user['id'] : '' ?>">
 
         <label for="prenom">Prénom :</label>
