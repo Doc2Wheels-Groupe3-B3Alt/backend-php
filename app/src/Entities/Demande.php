@@ -6,11 +6,15 @@ namespace App\Entities;
 use App\Commands\ConnectDatabase;
 
 
+
 class Demande extends AbstractEntity
 {
    
+    private $db;
     public int $id;
-    public $db = (new ConnectDatabase())->execute();
+    public function __construct() {
+        $this->db = (new ConnectDatabase())->execute();
+    }
     
 
     public function getId(): int

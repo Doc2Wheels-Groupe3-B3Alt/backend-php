@@ -12,11 +12,9 @@
     <nav class="navbar">
         <img class="navbar-logo" src='/src/Images/Placeholder.png' alt="Logo" />
         <div class="navbar-title">DOC 2 WHEELS</div>
-        <div class="navbar-menu">
+        <div class="navbar-menu gap-3">
             <a href="/homepage">Accueil</a>
-            <a href="#">Présentation</a>
             <a href="/createDemand">Demandes</a>
-            <a href="#">Contact</a>
         </div>
         <div class="navbar-profile">
             <img class="navbar-profil" src="/src/Images/Avatar.png" alt="Avatar" />
@@ -42,3 +40,4 @@
             </div>
         </div>
     </nav>
+    <div class="page">

@@ -2,10 +2,17 @@
 
 namespace App\Entities;
 
+use App\Commands\ConnectDatabase;
+use App\Entities\AbstractEntity;
+
 class Services extends AbstractEntity
 {
     public int $id;
-    public $db = (new ConnectDatabase())->execute();
+
+    private $db;
+    public function __construct() {
+        $this->db = (new ConnectDatabase())->execute();
+    }
     
 
     public function getId(): int

@@ -70,6 +70,16 @@
         "controller": "AdminRepairController"
     },
     {
+        "path": "/admin/dashboard",
+        "methods": ["GET"],
+        "controller": "AdminDashboardController"
+    },
+    {
+        "path": "/admin/feedback",
+        "methods": ["GET", "POST"],
+        "controller": "AdminFeedbackController"
+    },
+    {
         "path": "/profil",
         "methods": ["GET"],
         "controller": "ProfilController"
@@ -86,8 +96,13 @@
     },
     {
         "path": "/profil/demandes",
-        "methods": ["GET"],
+        "methods": ["GET", "POST"],
         "controller": "ProfilDemandController"
+    },
+    {
+        "path": "/profil/demande/avis",
+        "methods": ["GET", "POST"],
+        "controller": "ProfilDemandAvisController"
     },
     {
         "path": "/admin/repair/take",
